@@ -1,8 +1,36 @@
 import Joi from 'joi';
-import { createGenderValidation } from './validationCommonParams.js';
+import {
+  createCommonStringValidation,
+  createGenderValidation,
+  createNumberUnitValidation,
+} from './validationCommonParams.js';
+
 export const registerUserSchema = Joi.object({
-  name: Joi.string().min(3).max(12),
-  email: Joi.string().email().required(),
-  password: Joi.string().min(6).required(),
+  name: createCommonStringValidation('name'),
+  email: Joi.string()
+    .email()
+    .required()
+    .messages({ 'any.required': `(email) is required` }),
+  password: Joi.string()
+    .required()
+    .messages({ 'any.required': `(password) is required` }),
   gender: createGenderValidation(),
+  weight: createNumberUnitValidation('weight', 'kg', 0, 500, 65),
+  dailySportTime: createNumberUnitValidation(
+    'dailySportTime',
+    'hours',
+    0,
+    24,
+    0,
+  ),
+  dailyWaterNorm: createNumberUnitValidation(
+    'dailyWaterNorm',
+    'ml',
+    500,
+    15000,
+    1500,
+  ),
+  avatar: Joi.string().messages({
+    'string.base': `(avatar) should be a string`,
+  }),
 });
