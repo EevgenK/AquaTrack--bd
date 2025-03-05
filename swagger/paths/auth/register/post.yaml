@@ -13,10 +13,6 @@ requestBody:
           - email
           - password
         properties:
-          name:
-            description: 'User name'
-            type: string
-            example: 'John Snow'
           email:
             description: "User's email should have at least 'two' domain segments separated by a dot."
             type: string
@@ -45,20 +41,7 @@ responses:
               example: Successfully registered a user!
             data:
               type: object
-              required:
-                - _id
-                - name
-                - email
-              properties:
-                _id:
-                  type: string
-                  example: 65e4decdd286b30065d54af9
-                name:
-                  type: string
-                  example: 'Jon Snow'
-                email:
-                  type: string
-                  example: 'example@domain.com'
+              $ref: '../../../components/schemas/auth.yaml'
   '409':
     $ref: '../../../components/responses/409.yaml'
   '400':

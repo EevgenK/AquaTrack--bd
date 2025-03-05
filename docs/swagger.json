@@ -47,11 +47,6 @@
                   "password"
                 ],
                 "properties": {
-                  "name": {
-                    "description": "User name",
-                    "type": "string",
-                    "example": "John Snow"
-                  },
                   "email": {
                     "description": "User's email should have at least 'two' domain segments separated by a dot.",
                     "type": "string",
@@ -90,25 +85,7 @@
                     },
                     "data": {
                       "type": "object",
-                      "required": [
-                        "_id",
-                        "name",
-                        "email"
-                      ],
-                      "properties": {
-                        "_id": {
-                          "type": "string",
-                          "example": "65e4decdd286b30065d54af9"
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "Jon Snow"
-                        },
-                        "email": {
-                          "type": "string",
-                          "example": "example@domain.com"
-                        }
-                      }
+                      "$ref": "#/components/schemas/auth"
                     }
                   }
                 }
@@ -130,6 +107,93 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "auth": {
+        "type": "object",
+        "required": [
+          "_id",
+          "email"
+        ],
+        "properties": {
+          "_id": {
+            "description": "User`s id",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "email": {
+            "description": "User`s email",
+            "type": "string",
+            "example": "example@domain.com"
+          },
+          "name": {
+            "description": "Default user`s name, which can be changed later",
+            "type": "string",
+            "example": "User"
+          },
+          "gender": {
+            "description": "User`s gender",
+            "type": "string",
+            "enum": [
+              "woman",
+              "man"
+            ]
+          },
+          "weight": {
+            "description": "User`s weight",
+            "type": "object",
+            "properties": {
+              "value": {
+                "description": "Weight value",
+                "type": "number",
+                "example": 70
+              },
+              "unit": {
+                "description": "Weight unit",
+                "type": "string",
+                "example": "kg"
+              }
+            }
+          },
+          "dailySportTime": {
+            "type": "object",
+            "description": "User`s daily sport time",
+            "properties": {
+              "value": {
+                "description": "Daily sport time value",
+                "type": "number",
+                "example": 12
+              },
+              "unit": {
+                "description": "Daily sport time unit",
+                "type": "string",
+                "example": "hours"
+              }
+            }
+          },
+          "dailyWaterNorm": {
+            "type": "object",
+            "description": "User`s daily water norm",
+            "properties": {
+              "value": {
+                "description": "Daily water norm value",
+                "type": "number",
+                "example": 1500
+              },
+              "unit": {
+                "description": "Daily water norm unit",
+                "type": "string",
+                "example": "ml"
+              }
+            }
+          },
+          "avatar": {
+            "description": "Link to user's avatar",
+            "type": "string",
+            "example": "https://cloudinary.com/default-image"
+          }
+        }
       }
     },
     "responses": {

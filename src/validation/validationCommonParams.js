@@ -14,12 +14,19 @@ export const validationParams = {
     return this[el].map((type) => `'${type}'`).join(` ${symbol} `);
   },
 };
-/*MAKES JOY VALIDATION FOR elements required/not required with min:3, max:12*/
-export const createCommonStringValidation = (element, required) => {
+/*MAKES JOY VALIDATION FOR elements required/not required with min:3, max:12, defaultValue*/
+export const createCommonStringValidation = (
+  element,
+  required,
+  defaultValue,
+) => {
   let validation = Joi.string()
     .min(validationParams.min)
     .max(validationParams.max)
     .messages(validationParams.stringTypeMessageGenerator(element));
+  if (defaultValue) {
+    validation = validation.default(defaultValue);
+  }
   if (required) {
     validation = validation.required().messages({
       ...validationParams.stringTypeMessageGenerator(element),
