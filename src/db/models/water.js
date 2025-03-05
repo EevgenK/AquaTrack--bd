@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+import createHttpError from 'http-errors';
 
 const waterSchema = new Schema(
   {
@@ -23,5 +24,13 @@ const waterSchema = new Schema(
     versionKey: false,
   },
 );
+
+waterSchema.post('save', (error, data, next) => {
+  if (error) {
+    next(createHttpError(400, `${error.message}`));
+  } else {
+    next();
+  }
+});
 
 export const WaterCollection = model('water', waterSchema);

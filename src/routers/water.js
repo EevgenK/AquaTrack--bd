@@ -4,6 +4,8 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
 import { validateBody } from '../middlewares/validateBody.js';
 
+import { waterPostSchema } from '../validation/water.js';
+
 import {
   postWaterAmountCtrl,
   updateWaterAmountCtrl,
@@ -15,7 +17,14 @@ import {
 const router = express.Router();
 const jsonParser = express.json();
 
-router.post('/', jsonParser, validateBody(), ctrlWrapper(postWaterAmountCtrl));
+// ! перевірити де генерується юзер айді
+
+router.post(
+  '/',
+  jsonParser,
+  validateBody(waterPostSchema),
+  ctrlWrapper(postWaterAmountCtrl),
+);
 
 router.delete('/:id', ctrlWrapper(deleteWaterAmountCtrl));
 // router.delete('/:id', isValidId, ctrlWrapper(deleteContactCtrl));
