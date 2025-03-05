@@ -7,7 +7,7 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { domainHandler } from './middlewares/domainHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import router from './routers/index.js';
-import { getEnvVar } from './utils/getEnvar.js';
+import { getEnvVar } from './utils/getEnvVar.js';
 
 const PORT = Number(getEnvVar('PORT', '4000'));
 

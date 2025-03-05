@@ -4,7 +4,8 @@ const usersSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+      min: 3,
+      max: 12,
     },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -16,8 +17,9 @@ const usersSchema = new Schema(
     weight: {
       value: {
         type: Number,
-        default: 0,
         min: 0,
+        max: 500,
+        default: 65,
       },
       unit: {
         type: String,
@@ -28,8 +30,9 @@ const usersSchema = new Schema(
     dailySportTime: {
       value: {
         type: Number,
-        default: 0,
         min: 0,
+        max: 24,
+        default: 0,
       },
       unit: {
         type: String,
@@ -40,8 +43,9 @@ const usersSchema = new Schema(
     dailyWaterNorm: {
       value: {
         type: Number,
+        min: 500,
+        max: 15000,
         default: 1500,
-        min: 0,
       },
       unit: {
         type: String,
@@ -51,8 +55,7 @@ const usersSchema = new Schema(
     },
     avatar: {
       type: String,
-      default:
-        'https://res.cloudinary.com/dobkaq79k/image/upload/v1738604656/ogeqhuxc…' /*Temporary*/,
+      default: 'https://cloudinary.com/default-image',
     },
   },
   {
