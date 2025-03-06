@@ -34,3 +34,7 @@ export const registerUserSchema = Joi.object({
     'string.base': `(avatar) should be a string`,
   }),
 });
+
+export const loginWithGoogleOAuthSchema = Joi.object({
+  code: Joi.string().required(),
+});
