@@ -34,3 +34,8 @@ export const registerUserSchema = Joi.object({
     'string.base': `(avatar) should be a string`,
   }),
 });
+
+export const loginUserSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required(),
+});
