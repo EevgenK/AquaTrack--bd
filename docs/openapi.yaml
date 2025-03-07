@@ -27,6 +27,13 @@ paths:
   /auth/refresh:
     post:
       $ref: ../swagger/paths/auth/refresh/post.yaml
+  /water:
+    post:
+      $ref: ../swagger/paths/water/post.yaml
+  /water/daily/{date}:
+    delete:
+      $ref: ../swagger/paths/water/daily/{date}/delete.yaml
+
 components:
   securitySchemes:
     bearerAuth:

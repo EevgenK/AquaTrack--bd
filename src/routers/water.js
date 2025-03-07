@@ -21,14 +21,15 @@ const jsonParser = express.json();
 router.use(authenticate);
 
 router.post(
-  '/',
+  '/daily',
   jsonParser,
   validateBody(waterPostSchema),
   ctrlWrapper(postWaterAmountCtrl),
 );
+router.put('/daily/:date', ctrlWrapper(updateWaterAmountCtrl));
+router.delete('/daily/:date', ctrlWrapper(deleteWaterAmountCtrl));
 
-router.delete('/:id', ctrlWrapper(deleteWaterAmountCtrl));
-
-router.get('/:id', ctrlWrapper(getWaterDailyCtrl));
+router.get('/daily/:date', ctrlWrapper(getWaterDailyCtrl));
+router.get('/monthly/:date', ctrlWrapper(getWaterMonthlyCtrl));
 
 export default router;

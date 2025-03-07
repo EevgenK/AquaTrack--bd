@@ -1,0 +1,9 @@
+# tags:
+#   - Water
+# summary: Create water consumption record
+# operationId: createRecord
+# description: Create a new record
+# security:
+#   - bearerAuth: []
+# requestBody:
+#   content:
