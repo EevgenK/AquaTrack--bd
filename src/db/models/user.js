@@ -1,4 +1,3 @@
-import { validationParams } from '../../validation/validationCommonParams.js';
 import { model, Schema } from 'mongoose';
 const usersSchema = new Schema(
   {
@@ -12,47 +11,27 @@ const usersSchema = new Schema(
     password: { type: String, required: true },
     gender: {
       type: String,
-      enum: validationParams.gender,
+      enum: ['woman', 'man'],
       default: 'woman',
     },
     weight: {
-      value: {
-        type: Number,
-        min: 0,
-        max: 500,
-        default: 65,
-      },
-      unit: {
-        type: String,
-        enum: ['kg'],
-        default: 'kg',
-      },
+      type: Number,
+      min: 0,
+      max: 500,
+      default: 0,
     },
+
     dailySportTime: {
-      value: {
-        type: Number,
-        min: 0,
-        max: 24,
-        default: 0,
-      },
-      unit: {
-        type: String,
-        enum: ['hours'],
-        default: 'hours',
-      },
+      type: Number,
+      min: 0,
+      max: 24,
+      default: 0,
     },
     dailyWaterNorm: {
-      value: {
-        type: Number,
-        min: 500,
-        max: 15000,
-        default: 1500,
-      },
-      unit: {
-        type: String,
-        enum: ['ml'],
-        default: 'ml',
-      },
+      type: Number,
+      min: 500,
+      max: 15000,
+      default: 1500,
     },
     avatar: {
       type: String,

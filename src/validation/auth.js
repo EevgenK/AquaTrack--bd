@@ -1,35 +1,19 @@
 import Joi from 'joi';
 import {
   createCommonStringValidation,
-  createGenderValidation,
-  createNumberUnitValidation,
-} from './validationCommonParams.js';
+  createEnumValidation,
+  createNumberValidation,
+} from '../utils/validationCommonParams.js';
 
 export const registerUserSchema = Joi.object({
-  name: createCommonStringValidation('name', false, 'User'),
-  email: Joi.string()
-    .email()
-    .required()
-    .messages({ 'any.required': `(email) is required` }),
-  password: Joi.string()
-    .required()
-    .messages({ 'any.required': `(password) is required` }),
-  gender: createGenderValidation(),
-  weight: createNumberUnitValidation('weight', 'kg', 0, 500, 65),
-  dailySportTime: createNumberUnitValidation(
-    'dailySportTime',
-    'hours',
-    0,
-    24,
-    0,
-  ),
-  dailyWaterNorm: createNumberUnitValidation(
-    'dailyWaterNorm',
-    'ml',
-    500,
-    15000,
-    1500,
-  ),
+  name: createCommonStringValidation('name', false, 3, 12),
+  email: createCommonStringValidation('email', 'required', 3, 50),
+  password: createCommonStringValidation('password', 'required', 3, 50),
+  gender: createEnumValidation('gender'),
+
+  weight: createNumberValidation('weight', 0, 500),
+  dailySportTime: createNumberValidation('dailySportTime', 0, 24),
+  dailyWaterNorm: createNumberValidation('dailyWaterNorm', 500, 15000),
   avatar: Joi.string().messages({
     'string.base': `(avatar) should be a string`,
   }),
