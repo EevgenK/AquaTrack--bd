@@ -4,14 +4,7 @@ summary: Logout user from system
 operationId: logoutUser
 description: Logout user from system
 security: []
-parameters:
-  - name: sessionId
-    in: cookie
-    description: ID of the current user session.
-    required: true
-    schema:
-      type: string
-      example: '/UGIArv7wPULCiyYg6OwHQvIHeYjtdwO4n5i+WTW'
+
 responses:
   '204':
     description: Logout user from system
