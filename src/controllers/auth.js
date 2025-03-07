@@ -1,4 +1,4 @@
-import { getCurrentData, registerUser } from '../services/auth.js';
+import { getCurrentData, getUsersCount, registerUser } from '../services/auth.js';
 import {
   loginUser,
   logoutUser,
@@ -82,5 +82,15 @@ export const getCurrentDataController = async (req, res, next) => {
     status: 200,
     message: "Successfully recieved user's current data",
     data: currentData
+  })
+}
+
+export const getUsersCountController = async (req, res, next) => {
+  const totalCount = await getUsersCount()
+
+  res.json({
+    status: 200,
+    message: "Successfully get count of all users",
+    data: totalCount
   })
 }

@@ -95,3 +95,7 @@ export const getCurrentData = async (id) => {
     _id, name: name || 'user', email, gender, weight, dailySportTime, dailyWaterNorm: dailyWaterNorm || 1500, avatar
   }
 }
+
+export const getUsersCount = async () => {
+  return await UsersCollection.countDocuments()
+}
