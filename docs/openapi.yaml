@@ -33,6 +33,12 @@ paths:
   /auth/count:
     get:
       $ref: ../swagger/paths/auth/count/get.yaml
+  /auth/send-reset-email:
+    post:
+      $ref: ../swagger/paths/auth/send-reset-email/post.yaml
+  /auth/reset-pwd:
+    post:
+      $ref: ../swagger/paths/auth/reset-password/post.yaml
 components:
   securitySchemes:
     bearerAuth:

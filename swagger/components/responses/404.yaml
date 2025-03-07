@@ -13,4 +13,4 @@ content:
           example: 404
         message:
           type: string
-          example: User not found
+          example: Not found
