@@ -16,11 +16,12 @@ export const postWaterAmountCtrl = async (req, res) => {
   const waterLog = await postWaterAmount({
     date,
     value,
+    userId: req.user._id,
   });
 
   res.status(201).send({
     status: 201,
-    message: 'Posted water record successfully',
+    message: 'Successfully posted water record',
     data: waterLog,
   });
 };
