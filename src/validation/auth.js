@@ -34,3 +34,12 @@ export const registerUserSchema = Joi.object({
     'string.base': `(avatar) should be a string`,
   }),
 });
+
+export const requestResetEmailSchema = Joi.object({
+  email: Joi.string().email().required(),
+});
+
+export const resetPasswordSchema = Joi.object({
+  password: Joi.string().required(),
+  token: Joi.string().required(),
+});
