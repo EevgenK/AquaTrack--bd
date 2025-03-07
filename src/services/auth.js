@@ -83,3 +83,15 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
     ...newSession,
   });
 };
+
+export const getCurrentData = async (id) => {
+  const user = await UsersCollection.findOne({ _id: id })
+
+  if (!user) throw createHttpError(404, 'User not found')
+
+  const { _id, name, email, gender, weight, dailySportTime, dailyWaterNorm, avatar } = user
+
+  return {
+    _id, name: name || 'user', email, gender, weight, dailySportTime, dailyWaterNorm: dailyWaterNorm || 1500, avatar
+  }
+}
