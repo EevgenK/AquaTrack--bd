@@ -46,13 +46,15 @@ export const updateWaterAmountCtrl = async (req, res) => {
 };
 
 export const deleteWaterAmountCtrl = async (req, res) => {
-  const { date } = req.params;
+  const { id } = req.params;
 
-  const record = await deleteWaterAmount(date);
+  const record = await deleteWaterAmount(id);
   if (!record) {
-    throw new createHttpError.NotFound(
-      `Water record not found for date: ${date}`,
-    );
+    throw new createHttpError.NotFound('Water record not found');
+  }
+
+  if (record.userId.toString() !== req.user._id.toString()) {
+    throw new createHttpError.NotFound('Record not found');
   }
 
   res.status(204).send();

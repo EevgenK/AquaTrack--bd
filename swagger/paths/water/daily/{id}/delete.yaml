@@ -1,0 +1,80 @@
+tags:
+  - Water
+summary: Delete water consumption record
+operationId: deleteRecord
+description: Deletes a specific water consumption record by its ID.
+security:
+  - bearerAuth: []
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+    description: The ID of the water consumption record to delete
+responses:
+  '204':
+    description: Successfully deleted the water consumption record
+  '400':
+    description: Bad Request - Invalid ID format or missing ID
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 400
+            message:
+              type: string
+              example: 'BadRequestError'
+            data:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Invalid id format'
+  '401':
+    description: Unauthorized - Authentication failed
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 401
+            message:
+              type: string
+              example: 'UnauthorizedError'
+            data:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - 'Session not found'
+                    - 'Please provide Authorization header'
+                    - 'Auth header should be of type Bearer'
+                    - 'Access token expired'
+  '404':
+    description: Not Found - Water record not found or unauthorized access
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 404
+            message:
+              type: string
+              example: 'NotFoundError'
+            data:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Water record not found'
+  '500':
+    $ref: ../../../../components/responses/500.yaml

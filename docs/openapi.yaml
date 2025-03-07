@@ -30,9 +30,9 @@ paths:
   /water:
     post:
       $ref: ../swagger/paths/water/post.yaml
-  /water/daily/{date}:
+  /water/daily/{id}:
     delete:
-      $ref: ../swagger/paths/water/daily/{date}/delete.yaml
+      $ref: ../swagger/paths/water/daily/{id}/delete.yaml
 
 components:
   securitySchemes:

@@ -4,6 +4,7 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
 import { validateBody } from '../middlewares/validateBody.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import { isValidObjId } from '../middlewares/isValidObjId.js';
 
 import { waterPostSchema } from '../validation/water.js';
 
@@ -26,10 +27,11 @@ router.post(
   validateBody(waterPostSchema),
   ctrlWrapper(postWaterAmountCtrl),
 );
-router.put('/daily/:date', ctrlWrapper(updateWaterAmountCtrl));
-router.delete('/daily/:date', ctrlWrapper(deleteWaterAmountCtrl));
+router.put('/daily/:id', isValidObjId, ctrlWrapper(updateWaterAmountCtrl));
 
-router.get('/daily/:date', ctrlWrapper(getWaterDailyCtrl));
-router.get('/monthly/:date', ctrlWrapper(getWaterMonthlyCtrl));
+router.delete('/daily/:id', isValidObjId, ctrlWrapper(deleteWaterAmountCtrl));
+
+router.get('/daily/:id', ctrlWrapper(getWaterDailyCtrl));
+router.get('/monthly/:month', ctrlWrapper(getWaterMonthlyCtrl));
 
 export default router;

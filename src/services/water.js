@@ -6,8 +6,8 @@ export const postWaterAmount = async (payload) => {
 
 export const updateWaterAmount = async () => {};
 
-export const deleteWaterAmount = async (date) => {
-  return await WaterCollection.findOneAndDelete({ date });
+export const deleteWaterAmount = async (id) => {
+  return await WaterCollection.findByIdAndDelete(id);
 };
 
 export const getWaterDaily = async (day) => {};
