@@ -92,7 +92,7 @@ export const getCurrentData = async (id) => {
   const { _id, name, email, gender, weight, dailySportTime, dailyWaterNorm, avatar } = user
 
   return {
-    _id, name: name || 'user', email, gender, weight, dailySportTime, dailyWaterNorm: dailyWaterNorm || 1500, avatar
+    _id, name: name || 'User', email, gender, weight, dailySportTime, dailyWaterNorm: dailyWaterNorm || 1500, avatar
   }
 }
 
