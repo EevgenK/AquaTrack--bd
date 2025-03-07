@@ -6,6 +6,7 @@ const usersSchema = new Schema(
       type: String,
       min: 3,
       max: 12,
+      default: 'User',
     },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
@@ -55,7 +56,8 @@ const usersSchema = new Schema(
     },
     avatar: {
       type: String,
-      default: 'https://cloudinary.com/default-image',
+      default:
+        'https://res.cloudinary.com/dobkaq79k/image/upload/v1739270697/lz54yboqjkimsheddhoj.jpg',
     },
   },
   {

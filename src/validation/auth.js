@@ -6,7 +6,7 @@ import {
 } from './validationCommonParams.js';
 
 export const registerUserSchema = Joi.object({
-  name: createCommonStringValidation('name'),
+  name: createCommonStringValidation('name', false, 'User'),
   email: Joi.string()
     .email()
     .required()

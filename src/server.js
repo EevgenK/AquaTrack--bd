@@ -8,6 +8,7 @@ import { domainHandler } from './middlewares/domainHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import router from './routers/index.js';
 import { getEnvVar } from './utils/getEnvVar.js';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
 const PORT = Number(getEnvVar('PORT', '4000'));
 
@@ -30,7 +31,7 @@ export const setupServer = () => {
   app.use(cookieParser());
   app.get('/', domainHandler);
   app.use(router);
-  // app.use('/api-docs', swaggerDocs());
+  app.use('/api-docs', swaggerDocs());
   app.use('*', notFoundHandler);
   app.use(errorHandler);
 
