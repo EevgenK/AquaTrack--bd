@@ -4,7 +4,7 @@ summary: Get current user's data
 operationId: getCurrentData
 description: Get all current user's data
 security:
-  - Bearer Auth: []
+  - bearerAuth: []
 responses:
   '200':
     description: Successfully recieved user's current data
