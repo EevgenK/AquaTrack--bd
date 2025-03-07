@@ -14,7 +14,7 @@ content:
           example: 500
         message:
           type: string
-          example: 'Something went wrong'
+          example: 'InternalServerError'
         data:
           type: object
           required:
@@ -22,4 +22,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Internal Server Error'
+              example: 'Failed to send the email, please try again later.'
