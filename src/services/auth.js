@@ -52,3 +52,14 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
   await SessionsCollection.deleteOne({ _id: sessionId, refreshToken });
   return await createSessionById(session.userId);
 };
+
+export const getCurrentData = async (id) => {
+  const user = await UsersCollection.findOne({ _id: id });
+
+  if (!user) throw createHttpError(404, 'User not found');
+  return user;
+};
+
+export const getUsersCount = async () => {
+  return await UsersCollection.countDocuments();
+};

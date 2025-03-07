@@ -27,6 +27,12 @@ paths:
   /auth/refresh:
     post:
       $ref: ../swagger/paths/auth/refresh/post.yaml
+  /auth/data:
+    get:
+      $ref: ../swagger/paths/auth/data/get.yaml
+  /auth/count:
+    get:
+      $ref: ../swagger/paths/auth/count/get.yaml
 components:
   securitySchemes:
     bearerAuth:

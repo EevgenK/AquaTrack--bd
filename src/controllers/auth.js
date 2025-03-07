@@ -1,4 +1,6 @@
 import {
+  getCurrentData,
+  getUsersCount,
   registerUser,
   loginUser,
   logoutUser,
@@ -50,5 +52,25 @@ export const refreshUserSessionController = async (req, res) => {
     data: {
       accessToken: session.accessToken,
     },
+  });
+};
+
+export const getCurrentDataController = async (req, res, next) => {
+  const currentData = await getCurrentData(req.user._id);
+
+  res.json({
+    status: 200,
+    message: "Successfully recieved user's current data",
+    data: currentData,
+  });
+};
+
+export const getUsersCountController = async (req, res, next) => {
+  const totalCount = await getUsersCount();
+
+  res.json({
+    status: 200,
+    message: 'Successfully get count of all users',
+    data: totalCount,
   });
 };

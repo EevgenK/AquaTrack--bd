@@ -1,0 +1,29 @@
+tags:
+  - Auth
+summary: Get total count of registered users
+operationId: getUsersCount
+description: Get count of all registered users
+security: []
+responses:
+  '200':
+    description: Successfully get count of all users
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully get count of all users
+            data:
+              type: string
+              example: 5
+  '500':
+    $ref: '../../../components/responses/500.yaml'
