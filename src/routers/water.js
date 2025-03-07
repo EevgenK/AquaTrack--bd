@@ -3,6 +3,7 @@ import express from 'express';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
 import { validateBody } from '../middlewares/validateBody.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 import { waterPostSchema } from '../validation/water.js';
 
@@ -17,7 +18,7 @@ import {
 const router = express.Router();
 const jsonParser = express.json();
 
-// ! перевірити де генерується юзер айді
+router.use(authenticate);
 
 router.post(
   '/',
@@ -27,7 +28,6 @@ router.post(
 );
 
 router.delete('/:id', ctrlWrapper(deleteWaterAmountCtrl));
-// router.delete('/:id', isValidId, ctrlWrapper(deleteContactCtrl));
 
 router.get('/:id', ctrlWrapper(getWaterDailyCtrl));
 

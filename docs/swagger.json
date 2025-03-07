@@ -100,6 +100,212 @@
           }
         }
       }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login User",
+        "operationId": "loginUser",
+        "description": "Login User in the Application",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "description": "User Email",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "User Password",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully logged in an user!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully logged in an user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "accessToken"
+                      ],
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "example": "/UGIArv7wPULCiyYg6OwHQvIHeYjtdwO4n5i+WTW"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout user from system",
+        "operationId": "logoutUser",
+        "description": "Logout user from system",
+        "security": [],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "cookie",
+            "description": "ID of the current user session.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "/UGIArv7wPULCiyYg6OwHQvIHeYjtdwO4n5i+WTW"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Logout user from system",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 204
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Refresh session token",
+        "operationId": "refreshUsersSession",
+        "description": "Refreshes the user session, generates a new access token and updates cookies.",
+        "security": [],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "cookie",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "/UGIArv7wPULCiyYg6OwHQvIHeYjtdwO4n5i+WTW"
+            }
+          },
+          {
+            "name": "refreshToken",
+            "in": "cookie",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "/UGIArv7wPULCiyYg6OwHQvIHeYjtdwO4n5i+WTW"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully refreshed user session",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully refreshed a session!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "accessToken"
+                      ],
+                      "properties": {
+                        "accessToken": {
+                          "description": "Session token",
+                          "type": "string",
+                          "example": "/UGIArv7wPULCiyYg6OwHQvIHeYjtdwO4n5i+WTW"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -141,57 +347,24 @@
             ]
           },
           "weight": {
-            "description": "User`s weight",
-            "type": "object",
-            "properties": {
-              "value": {
-                "description": "Weight value",
-                "type": "number",
-                "example": 70
-              },
-              "unit": {
-                "description": "Weight unit",
-                "type": "string",
-                "example": "kg"
-              }
-            }
+            "type": "string",
+            "description": "User`s weight must be a positive number, not exceeding 500. Unit measurement is \"kg\" in data base ",
+            "example": 70
           },
           "dailySportTime": {
-            "type": "object",
-            "description": "User`s daily sport time",
-            "properties": {
-              "value": {
-                "description": "Daily sport time value",
-                "type": "number",
-                "example": 12
-              },
-              "unit": {
-                "description": "Daily sport time unit",
-                "type": "string",
-                "example": "hours"
-              }
-            }
+            "type": "string",
+            "description": "User`s daily sport time must be a positive number, not exceeding 24. Unit measurement is \"hours\" in data base ",
+            "example": 12
           },
           "dailyWaterNorm": {
-            "type": "object",
-            "description": "User`s daily water norm",
-            "properties": {
-              "value": {
-                "description": "Daily water norm value",
-                "type": "number",
-                "example": 1500
-              },
-              "unit": {
-                "description": "Daily water norm unit",
-                "type": "string",
-                "example": "ml"
-              }
-            }
+            "type": "string",
+            "description": "User`s daily water norm must be a positive number, not exceeding 15000. Unit measurement is \"ml\" in data base ",
+            "example": 1500
           },
           "avatar": {
             "description": "Link to user's avatar",
             "type": "string",
-            "example": "https://cloudinary.com/default-image"
+            "example": "https://res.cloudinary.com/dobkaq79k/image/upload/v1739270697/lz54yboqjkimsheddhoj.jpg"
           }
         }
       }
@@ -238,6 +411,43 @@
           }
         }
       },
+      "401": {
+        "description": "Unauthorized error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 401
+                },
+                "message": {
+                  "type": "string",
+                  "example": "UnauthorizedError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Access token expired"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "409": {
         "description": "Conflict Error",
         "content": {
@@ -267,6 +477,44 @@
                     "message": {
                       "type": "string",
                       "example": "Email in use"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "description": "HTTP error status.",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Something went wrong"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Internal Server Error"
                     }
                   }
                 }
