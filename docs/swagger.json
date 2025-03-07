@@ -174,6 +174,9 @@
           "401": {
             "$ref": "#/components/responses/401"
           },
+          "404": {
+            "$ref": "#/components/responses/404-contact"
+          },
           "500": {
             "$ref": "#/components/responses/500"
           }
@@ -189,18 +192,6 @@
         "operationId": "logoutUser",
         "description": "Logout user from system",
         "security": [],
-        "parameters": [
-          {
-            "name": "sessionId",
-            "in": "cookie",
-            "description": "ID of the current user session.",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "/UGIArv7wPULCiyYg6OwHQvIHeYjtdwO4n5i+WTW"
-            }
-          }
-        ],
         "responses": {
           "204": {
             "description": "Logout user from system",
@@ -239,26 +230,6 @@
         "operationId": "refreshUsersSession",
         "description": "Refreshes the user session, generates a new access token and updates cookies.",
         "security": [],
-        "parameters": [
-          {
-            "name": "sessionId",
-            "in": "cookie",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "/UGIArv7wPULCiyYg6OwHQvIHeYjtdwO4n5i+WTW"
-            }
-          },
-          {
-            "name": "refreshToken",
-            "in": "cookie",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "/UGIArv7wPULCiyYg6OwHQvIHeYjtdwO4n5i+WTW"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successfully refreshed user session",
@@ -300,6 +271,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404-session"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -515,6 +489,80 @@
                     "message": {
                       "type": "string",
                       "example": "Internal Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404-contact": {
+        "description": "Not Found Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "NotFoundError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "404-session": {
+        "description": "Not Found Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "NotFoundError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Session not found"
                     }
                   }
                 }
