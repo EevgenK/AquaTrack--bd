@@ -33,10 +33,11 @@ paths:
   /water/daily/{id}:
     delete:
       $ref: ../swagger/paths/water/daily/{id}/delete.yaml
-
   /auth/data:
     get:
       $ref: ../swagger/paths/auth/data/get.yaml
+    patch:
+      $ref: ../swagger/paths/auth/data/patch.yaml
   /auth/count:
     get:
       $ref: ../swagger/paths/auth/count/get.yaml
@@ -46,6 +47,9 @@ paths:
   /auth/reset-pwd:
     post:
       $ref: ../swagger/paths/auth/reset-password/post.yaml
+  /auth/data-avatar-load:
+    put:
+      $ref: ../swagger/paths/auth/data-avatar-load/put.yaml
 components:
   securitySchemes:
     bearerAuth:
