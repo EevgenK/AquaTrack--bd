@@ -23,8 +23,13 @@ export const createCommonStringValidation = (
   return validation;
 };
 /*MAKES JOY VALIDATION FOR elements type:number which are тще required & and have min, max values */
-export const createNumberValidation = (element, minValue, maxValue) => {
-  return Joi.number()
+export const createNumberValidation = (
+  element,
+  required,
+  minValue,
+  maxValue,
+) => {
+  let validation = Joi.number()
     .min(minValue)
     .max(maxValue)
     .messages({
@@ -32,6 +37,12 @@ export const createNumberValidation = (element, minValue, maxValue) => {
       'number.min': `${element} value cannot be less than {#limit}`,
       'number.max': `${element} value cannot be more than {#limit}`,
     });
+  if (required) {
+    validation = validation.required().messages({
+      'any.required': `${element} is required`,
+    });
+  }
+  return validation;
 };
 /*MAKES JOY VALIDATION FOR elements which "enum" inside */
 export const createEnumValidation = (el) =>

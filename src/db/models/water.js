@@ -1,4 +1,7 @@
 import { model, Schema } from 'mongoose';
+import createHttpError from 'http-errors';
+
+import { dateRegEx } from '../../validation/validationRegEx.js ';
 
 const waterSchema = new Schema(
   {
@@ -10,6 +13,7 @@ const waterSchema = new Schema(
     date: {
       type: String,
       required: true,
+      match: dateRegEx,
     },
     value: {
       type: Number,
@@ -23,5 +27,13 @@ const waterSchema = new Schema(
     versionKey: false,
   },
 );
+
+waterSchema.post('save', (error, data, next) => {
+  if (error) {
+    next(createHttpError(400, `${error.message}`));
+  } else {
+    next();
+  }
+});
 
 export const WaterCollection = model('water', waterSchema);
