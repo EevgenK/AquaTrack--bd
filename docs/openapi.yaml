@@ -27,10 +27,12 @@ paths:
   /auth/refresh:
     post:
       $ref: ../swagger/paths/auth/refresh/post.yaml
-  /water:
+  /water/daily:
     post:
       $ref: ../swagger/paths/water/daily/post.yaml
   /water/daily/{id}:
+    put:
+      $ref: ../swagger/paths/water/daily/{id}/put.yaml
     delete:
       $ref: ../swagger/paths/water/daily/{id}/delete.yaml
   /auth/data:

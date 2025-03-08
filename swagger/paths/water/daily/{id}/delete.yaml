@@ -58,23 +58,6 @@ responses:
                     - 'Auth header should be of type Bearer'
                     - 'Access token expired'
   '404':
-    description: Not Found - Water record not found or unauthorized access
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            status:
-              type: integer
-              example: 404
-            message:
-              type: string
-              example: 'NotFoundError'
-            data:
-              type: object
-              properties:
-                message:
-                  type: string
-                  example: 'Water record not found'
+    $ref: ../../../../components/responses/404-water.yaml
   '500':
     $ref: ../../../../components/responses/500.yaml

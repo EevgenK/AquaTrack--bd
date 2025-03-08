@@ -1,0 +1,12 @@
+description: Not Found - Record does not exist
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: 'Water record not found'
