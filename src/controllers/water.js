@@ -73,6 +73,17 @@ export const deleteWaterAmountCtrl = async (req, res) => {
   res.status(204).send();
 };
 
-export const getWaterDailyCtrl = async (req, res) => {};
+export const getWaterDailyCtrl = async (req, res) => {
+  const { date } = req.params;
+  const userId = req.user._id;
+
+  const records = await getWaterDaily(userId, date);
+
+  res.status(200).send({
+    status: 200,
+    message: `Successfully fetched water records for ${date}`,
+    data: records,
+  });
+};
 
 export const getWaterMonthlyCtrl = async (req, res) => {};

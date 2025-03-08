@@ -36,7 +36,7 @@ router.put(
 );
 router.delete('/daily/:id', isValidObjId, ctrlWrapper(deleteWaterAmountCtrl));
 
-router.get('/daily/:id', ctrlWrapper(getWaterDailyCtrl));
+router.get('/daily/by-date/:date', ctrlWrapper(getWaterDailyCtrl));
 router.get('/monthly/:month', ctrlWrapper(getWaterMonthlyCtrl));
 
 export default router;

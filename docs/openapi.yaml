@@ -27,14 +27,6 @@ paths:
   /auth/refresh:
     post:
       $ref: ../swagger/paths/auth/refresh/post.yaml
-  /water/daily:
-    post:
-      $ref: ../swagger/paths/water/daily/post.yaml
-  /water/daily/{id}:
-    put:
-      $ref: ../swagger/paths/water/daily/{id}/put.yaml
-    delete:
-      $ref: ../swagger/paths/water/daily/{id}/delete.yaml
   /auth/data:
     get:
       $ref: ../swagger/paths/auth/data/get.yaml
@@ -52,6 +44,17 @@ paths:
   /auth/data-avatar-load:
     put:
       $ref: ../swagger/paths/auth/data-avatar-load/put.yaml
+  /water/daily:
+    post:
+      $ref: ../swagger/paths/water/daily/post.yaml
+  /water/daily/{id}:
+    put:
+      $ref: ../swagger/paths/water/daily/{id}/put.yaml
+    delete:
+      $ref: ../swagger/paths/water/daily/{id}/delete.yaml
+  /water/daily/by-date/{date}:
+    get:
+      $ref: ../swagger/paths/water/daily/by-date/{date}/get.yaml
 components:
   securitySchemes:
     bearerAuth:

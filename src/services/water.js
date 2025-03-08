@@ -14,6 +14,11 @@ export const deleteWaterAmount = async (id) => {
   return await WaterCollection.findByIdAndDelete(id);
 };
 
-export const getWaterDaily = async (day) => {};
+export const getWaterDaily = async (userId, date) => {
+  return await WaterCollection.find({
+    userId,
+    date: { $regex: `^${date}T` },
+  }).sort({ date: 1 });
+};
 
 export const getWaterMonthly = async (month) => {};

@@ -40,29 +40,34 @@ responses:
             data:
               type: object
               properties:
+                _id:
+                  description: "Record's id"
+                  type: string
+                  format: ObjectId
+                  example: '67cb1d5e131a73e6d77f1dfe'
                 userId:
                   description: "User's id who owns the record"
                   type: string
+                  format: ObjectId
                   example: '67cb1ae6f70ee5331ff1d50c'
                 date:
                   description: 'Date and time of consumption'
                   type: string
+                  format: date-time
                   example: '2025-03-07T14:30'
                 value:
                   description: 'The amount of water consumed'
                   type: number
                   example: 500
-                _id:
-                  description: "Record's id"
-                  type: string
-                  example: '67cb1d5e131a73e6d77f1dfe'
                 createdAt:
                   description: 'Timestamp when the record was created'
                   type: string
+                  format: date-time
                   example: '2025-03-07T16:22:54.393Z'
                 updatedAt:
                   description: 'Timestamp when the record was last updated'
                   type: string
+                  format: date-time
                   example: '2025-03-07T16:22:54.393Z'
   '400':
     description: Bad Request - Validation error
