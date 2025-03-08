@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose';
+import { dateRegEx } from '../../validation/validationRegEx.js ';
 
 const waterSchema = new Schema(
   {
@@ -10,6 +11,7 @@ const waterSchema = new Schema(
     date: {
       type: String,
       required: true,
+      match: dateRegEx,
     },
     value: {
       type: Number,

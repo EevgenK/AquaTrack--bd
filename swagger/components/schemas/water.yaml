@@ -1,0 +1,18 @@
+type: object
+required:
+  - userId
+  - date
+  - value
+properties:
+  userId:
+    description: 'User`s id'
+    type: string
+    example: 65e4decdd286b30065d54af9
+  date:
+    description: 'Date of water intake. Should be in format "YY-MM-DD"'
+    type: string
+    example: '08-03-2025'
+  value:
+    description: 'Water daily value should be not less than 50 and not exceeding 5000. Unit measurement is "ml" in data base'
+    type: number
+    example: 1500

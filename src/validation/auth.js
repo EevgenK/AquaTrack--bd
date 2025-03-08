@@ -11,9 +11,9 @@ export const registerUserSchema = Joi.object({
   password: createCommonStringValidation('password', 'required', 3, 50),
   gender: createEnumValidation('gender'),
 
-  weight: createNumberValidation('weight', 0, 500),
-  dailySportTime: createNumberValidation('dailySportTime', 0, 24),
-  dailyWaterNorm: createNumberValidation('dailyWaterNorm', 500, 15000),
+  weight: createNumberValidation('weight', false, 0, 500),
+  dailySportTime: createNumberValidation('dailySportTime', false, 0, 24),
+  dailyWaterNorm: createNumberValidation('dailyWaterNorm', false, 500, 15000),
   avatar: Joi.string().messages({
     'string.base': `(avatar) should be a string`,
   }),
