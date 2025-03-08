@@ -1,8 +1,12 @@
 import {
+  getCurrentData,
+  getUsersCount,
   registerUser,
   loginUser,
   logoutUser,
   refreshUsersSession,
+  resetPassword,
+  requestResetToken,
 } from '../services/auth.js';
 import { setupSession } from '../utils/createSessions.js';
 
@@ -50,5 +54,42 @@ export const refreshUserSessionController = async (req, res) => {
     data: {
       accessToken: session.accessToken,
     },
+  });
+};
+
+export const getCurrentDataController = async (req, res, next) => {
+  const currentData = await getCurrentData(req.user._id);
+
+  res.json({
+    status: 200,
+    message: "Successfully recieved user's current data",
+    data: currentData,
+  });
+};
+
+export const getUsersCountController = async (req, res, next) => {
+  const totalCount = await getUsersCount();
+
+  res.json({
+    status: 200,
+    message: 'Successfully get count of all users',
+    data: totalCount,
+  });
+};
+export const requestResetEmailController = async (req, res) => {
+  await requestResetToken(req.body.email);
+  res.json({
+    message: 'Reset password email was successfully sent!',
+    status: 200,
+    data: {},
+  });
+};
+
+export const resetPasswordController = async (req, res) => {
+  await resetPassword(req.body);
+  res.json({
+    message: 'Password was successfully reset!',
+    status: 200,
+    data: {},
   });
 };

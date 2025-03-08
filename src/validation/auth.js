@@ -11,9 +11,9 @@ export const registerUserSchema = Joi.object({
   password: createCommonStringValidation('password', 'required', 3, 50),
   gender: createEnumValidation('gender'),
 
-  weight: createNumberValidation('weight', 0, 500),
-  dailySportTime: createNumberValidation('dailySportTime', 0, 24),
-  dailyWaterNorm: createNumberValidation('dailyWaterNorm', 500, 15000),
+  weight: createNumberValidation('weight', false, 0, 500),
+  dailySportTime: createNumberValidation('dailySportTime', false, 0, 24),
+  dailyWaterNorm: createNumberValidation('dailyWaterNorm', false, 500, 15000),
   avatar: Joi.string().messages({
     'string.base': `(avatar) should be a string`,
   }),
@@ -22,4 +22,12 @@ export const registerUserSchema = Joi.object({
 export const loginUserSchema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
+});
+export const requestResetEmailSchema = Joi.object({
+  email: Joi.string().email().required(),
+});
+
+export const resetPasswordSchema = Joi.object({
+  password: Joi.string().required(),
+  token: Joi.string().required(),
 });

@@ -1,6 +1,8 @@
 import { model, Schema } from 'mongoose';
 import createHttpError from 'http-errors';
 
+import { dateRegEx } from '../../validation/validationRegEx.js ';
+
 const waterSchema = new Schema(
   {
     userId: {
@@ -11,6 +13,7 @@ const waterSchema = new Schema(
     date: {
       type: String,
       required: true,
+      match: dateRegEx,
     },
     value: {
       type: Number,

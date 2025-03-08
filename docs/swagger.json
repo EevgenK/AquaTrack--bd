@@ -175,7 +175,7 @@
             "$ref": "#/components/responses/401"
           },
           "404": {
-            "$ref": "#/components/responses/404-contact"
+            "$ref": "#/components/responses/404-user"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -274,6 +274,328 @@
           },
           "404": {
             "$ref": "#/components/responses/404-session"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/data": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Get current user's data",
+        "operationId": "getCurrentData",
+        "description": "Get all current user's data",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully recieved user's current data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully recieved user's current data"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "_id",
+                        "name",
+                        "email",
+                        "gender",
+                        "weight",
+                        "dailySportTime",
+                        "dailyWaterNorm",
+                        "avatar"
+                      ],
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "67cad75e84050dd76cc883ba",
+                          "description": "User's id"
+                        },
+                        "name": {
+                          "type": "string",
+                          "minLength": 3,
+                          "maxLength": 12,
+                          "example": "John Doe",
+                          "description": "User's name",
+                          "default": "User"
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email",
+                          "example": "john.doe@example.com",
+                          "description": "User's email"
+                        },
+                        "gender": {
+                          "type": "string",
+                          "enum": [
+                            "woman",
+                            "man"
+                          ],
+                          "example": "woman",
+                          "default": "woman",
+                          "description": "User's gender"
+                        },
+                        "weight": {
+                          "type": "number",
+                          "example": 65,
+                          "minimum": 0,
+                          "maximum": 500,
+                          "default": 65,
+                          "description": "User's weight in kg"
+                        },
+                        "dailySportTime": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 24,
+                          "minimum": 0,
+                          "maximum": 24,
+                          "default": 0,
+                          "description": "Hours of user's sport time per day"
+                        },
+                        "dailyWaterNorm": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 500,
+                          "minimum": 1500,
+                          "maximum": 15000,
+                          "default": 1500,
+                          "description": "User's daily water norm in ml"
+                        },
+                        "avatar": {
+                          "type": "string",
+                          "format": "binary",
+                          "example": "https://example.com/avatar.jpg",
+                          "default": "https://res.cloudinary.com/dobkaq79k/image/upload/v1739270697/lz54yboqjkimsheddhoj.jpg",
+                          "description": "Link to user's avatar"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404-user"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/count": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Get total count of registered users",
+        "operationId": "getUsersCount",
+        "description": "Get count of all registered users",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Successfully get count of all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully get count of all users"
+                    },
+                    "data": {
+                      "type": "string",
+                      "example": 5
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/request-reset-email": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Send reset password to email",
+        "operationId": "sendResetToken",
+        "description": "Send reset password message to email from the Application",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email"
+                ],
+                "properties": {
+                  "email": {
+                    "description": "User Email",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reset password email was successfully sent!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Reset password email has been successfully sent!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "example": {}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404-user"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/reset-pwd": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Reset user password",
+        "operationId": "resetPassword",
+        "description": "Reset password from email message in the Application",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "token",
+                  "password"
+                ],
+                "properties": {
+                  "token": {
+                    "description": "JWT Token from email",
+                    "type": "string"
+                  },
+                  "password": {
+                    "description": "New password",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password was successfully reset!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Password was successfully reset!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "example": {}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -422,6 +744,31 @@
           }
         }
       },
+      "404": {
+        "description": "Not Found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 404
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Not found"
+                }
+              }
+            }
+          }
+        }
+      },
       "409": {
         "description": "Conflict Error",
         "content": {
@@ -478,7 +825,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "Something went wrong"
+                  "example": "InternalServerError"
                 },
                 "data": {
                   "type": "object",
@@ -488,7 +835,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "Internal Server Error"
+                      "example": "Failed to send the email, please try again later."
                     }
                   }
                 }
@@ -497,7 +844,7 @@
           }
         }
       },
-      "404-contact": {
+      "404-user": {
         "description": "Not Found Error",
         "content": {
           "application/json": {

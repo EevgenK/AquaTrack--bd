@@ -48,6 +48,6 @@ responses:
   '401':
     $ref: '../../../components/responses/401.yaml'
   '404':
-    $ref: '../../../components/responses/404-contact.yaml'
+    $ref: '../../../components/responses/404-user.yaml'
   '500':
     $ref: '../../../components/responses/500.yaml'

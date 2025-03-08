@@ -34,6 +34,18 @@ paths:
     delete:
       $ref: ../swagger/paths/water/daily/{id}/delete.yaml
 
+  /auth/data:
+    get:
+      $ref: ../swagger/paths/auth/data/get.yaml
+  /auth/count:
+    get:
+      $ref: ../swagger/paths/auth/count/get.yaml
+  /auth/request-reset-email:
+    post:
+      $ref: ../swagger/paths/auth/request-reset-email/post.yaml
+  /auth/reset-pwd:
+    post:
+      $ref: ../swagger/paths/auth/reset-password/post.yaml
 components:
   securitySchemes:
     bearerAuth:
