@@ -5,29 +5,29 @@ import {
   createNumberValidation,
 } from '../utils/validationCommonParams.js';
 
-export const registerUserSchema = Joi.object({
+export const updateCurrentDataSchema = Joi.object({
   name: createCommonStringValidation('name', false, 3, 12),
-  email: createCommonStringValidation('email', 'required', 3, 50),
-  password: createCommonStringValidation('password', 'required', 3, 50),
+  email: createCommonStringValidation('email', false, 3, 50),
   gender: createEnumValidation('gender'),
-
   weight: createNumberValidation('weight', false, 0, 500),
   dailySportTime: createNumberValidation('dailySportTime', false, 0, 24),
   dailyWaterNorm: createNumberValidation('dailyWaterNorm', false, 500, 15000),
-  avatar: Joi.string().messages({
-    'string.base': `(avatar) should be a string`,
-  }),
 });
 
 export const loginUserSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().required(),
+  email: createCommonStringValidation('email', 'required', 3, 50),
+  password: createCommonStringValidation('password', 'required', 3, 50),
 });
 export const requestResetEmailSchema = Joi.object({
-  email: Joi.string().email().required(),
+  email: createCommonStringValidation('email', 'required', 3, 50),
 });
 
 export const resetPasswordSchema = Joi.object({
-  password: Joi.string().required(),
+  password: createCommonStringValidation('password', 'required', 3, 50),
   token: Joi.string().required(),
+});
+
+export const registerUserSchema = Joi.object({
+  email: createCommonStringValidation('email', 'required', 3, 50),
+  password: createCommonStringValidation('password', 'required', 3, 50),
 });

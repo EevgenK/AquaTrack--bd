@@ -1,3 +1,4 @@
+import createHttpError from 'http-errors';
 import {
   getCurrentData,
   getUsersCount,
@@ -7,8 +8,10 @@ import {
   refreshUsersSession,
   resetPassword,
   requestResetToken,
+  updateData,
 } from '../services/auth.js';
 import { setupSession } from '../utils/createSessions.js';
+import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 
 export const registerUserController = async (req, res, next) => {
   const user = await registerUser(req.body);
@@ -91,5 +94,32 @@ export const resetPasswordController = async (req, res) => {
     message: 'Password was successfully reset!',
     status: 200,
     data: {},
+  });
+};
+
+export const updateCurrentDataController = async (req, res, next) => {
+  const { _id: userId } = req.user;
+  const result = await updateData(userId, req.body);
+
+  res.json({
+    status: 200,
+    message: `Successfully updated user's data!`,
+    data: result.data,
+  });
+};
+
+export const loadAvatarController = async (req, res, next) => {
+  const { _id: userId } = req.user;
+  const avatar = req.file;
+  if (!avatar) {
+    throw createHttpError(400, 'Should be a file in request');
+  }
+  const avatarUrl = await saveFileToUploadDir(avatar);
+  const result = await updateData(userId, { avatar: avatarUrl });
+
+  res.json({
+    status: 200,
+    message: `Successfully updated user's avatar!`,
+    data: result.data.avatar,
   });
 };

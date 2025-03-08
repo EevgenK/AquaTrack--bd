@@ -6,6 +6,7 @@ import {
   registerUserSchema,
   requestResetEmailSchema,
   resetPasswordSchema,
+  updateCurrentDataSchema,
 } from '../validation/auth.js';
 import {
   loginUserController,
@@ -16,8 +17,11 @@ import {
   getUsersCountController,
   requestResetEmailController,
   resetPasswordController,
+  updateCurrentDataController,
+  loadAvatarController,
 } from '../controllers/auth.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import { upload } from '../middlewares/multer.js';
 
 const router = Router();
 router.post(
@@ -50,6 +54,19 @@ router.post(
   '/reset-password',
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordController),
+);
+
+router.patch(
+  '/data',
+  authenticate,
+  validateBody(updateCurrentDataSchema),
+  ctrlWrapper(updateCurrentDataController),
+);
+router.put(
+  '/data-avatar-load',
+  authenticate,
+  upload.single('photo'),
+  ctrlWrapper(loadAvatarController),
 );
 
 export default router;

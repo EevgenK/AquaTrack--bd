@@ -9,7 +9,7 @@ properties:
     type: string
     example: 65e4decdd286b30065d54af9
   date:
-    description: 'Date of water intake. Should be in format "YY-MM-DD"'
+    description: 'Date of water intake. Should be in format "YYYY-MM-DDTHH:MM"'
     type: string
     example: '08-03-2025'
   value:

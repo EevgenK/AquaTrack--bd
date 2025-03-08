@@ -142,3 +142,16 @@ export const resetPassword = async (payload) => {
     { password: encryptedPassword },
   );
 };
+
+export const updateData = async (userId, payload) => {
+  const rawResult = await UsersCollection.findOneAndUpdate(userId, payload, {
+    new: true,
+    includeResultMetadata: true,
+  });
+  if (!rawResult || !rawResult.value)
+    throw createHttpError(404, 'User`s data not found');
+  return {
+    data: rawResult.value,
+    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
+  };
+};
