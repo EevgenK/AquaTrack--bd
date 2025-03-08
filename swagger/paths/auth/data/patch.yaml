@@ -1,0 +1,66 @@
+tags:
+  - Auth
+summary: Change user`s data
+operationId: patchUser
+description: 'Change user`s data'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          email:
+            description: 'User`s email'
+            type: string
+            example: 'example@domain.com'
+          name:
+            description: 'Default user`s name, which can be changed later'
+            type: string
+            example: 'User'
+          gender:
+            description: 'User`s gender'
+            type: string
+            enum: ['woman', 'man']
+          weight:
+            type: string
+            description: 'User`s weight must be a positive number, not exceeding 500. Unit measurement is "kg" in data base '
+            example: 70
+          dailySportTime:
+            type: string
+            description: 'User`s daily sport time must be a positive number, not exceeding 24. Unit measurement is "hours" in data base '
+            example: 12
+          dailyWaterNorm:
+            type: string
+            description: 'User`s daily water norm must be a positive number, not exceeding 15000. Unit measurement is "ml" in data base '
+            example: 1500
+responses:
+  '200':
+    description: Change user`s data
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully updated user's data!
+            data:
+              type: object
+              $ref: '../../../components/schemas/auth.yaml'
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404-user-data.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'

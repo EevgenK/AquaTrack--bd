@@ -35,4 +35,4 @@ properties:
   avatar:
     description: "Link to user's avatar"
     type: string
-    example: https://res.cloudinary.com/dobkaq79k/image/upload/v1739270697/lz54yboqjkimsheddhoj.jpg
+    example: https://res.cloudinary.com/dobkaq79k/image/upload/example.img
