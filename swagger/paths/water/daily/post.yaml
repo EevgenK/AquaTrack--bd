@@ -93,6 +93,7 @@ responses:
                         example:
                           - '(date) is required'
                           - '(date) should be a string'
+                          - '(date) should be in follow format YYYY-MM-DDTHH:mm'
                           - '(value) is required'
                           - '(value) should be a number'
                           - '(value) cannot be less than 50'

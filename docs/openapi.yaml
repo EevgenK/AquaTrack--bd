@@ -29,7 +29,7 @@ paths:
       $ref: ../swagger/paths/auth/refresh/post.yaml
   /water:
     post:
-      $ref: ../swagger/paths/water/post.yaml
+      $ref: ../swagger/paths/water/daily/post.yaml
   /water/daily/{id}:
     delete:
       $ref: ../swagger/paths/water/daily/{id}/delete.yaml
