@@ -11,3 +11,5 @@ export const waterPostSchema = Joi.object({
   }),
   value: createNumberValidation('value', 'required', 50, 5000).required(),
 });
+
+export const waterPutSchema = waterPostSchema;

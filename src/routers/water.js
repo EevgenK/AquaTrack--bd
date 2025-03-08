@@ -6,7 +6,7 @@ import { validateBody } from '../middlewares/validateBody.js';
 import { authenticate } from '../middlewares/authenticate.js';
 import { isValidObjId } from '../middlewares/isValidObjId.js';
 
-import { waterPostSchema } from '../validation/water.js';
+import { waterPostSchema, waterPutSchema } from '../validation/water.js';
 
 import {
   postWaterAmountCtrl,
@@ -27,8 +27,13 @@ router.post(
   validateBody(waterPostSchema),
   ctrlWrapper(postWaterAmountCtrl),
 );
-router.put('/daily/:id', isValidObjId, ctrlWrapper(updateWaterAmountCtrl));
-
+router.put(
+  '/daily/:id',
+  isValidObjId,
+  jsonParser,
+  validateBody(waterPutSchema),
+  ctrlWrapper(updateWaterAmountCtrl),
+);
 router.delete('/daily/:id', isValidObjId, ctrlWrapper(deleteWaterAmountCtrl));
 
 router.get('/daily/:id', ctrlWrapper(getWaterDailyCtrl));
