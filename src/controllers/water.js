@@ -27,14 +27,16 @@ export const postWaterAmountCtrl = async (req, res) => {
 };
 
 export const updateWaterAmountCtrl = async (req, res) => {
-  const { date } = req.params;
-  const { value } = req.body;
+  const { id } = req.params;
+  const { date, value } = req.body;
 
-  const existingRecord = await WaterCollection.findOne({ date });
+  const existingRecord = await WaterCollection.findById(id);
   if (!existingRecord) {
-    throw new createHttpError.NotFound(
-      `Water record not found for date: ${date}`,
-    );
+    throw new createHttpError.NotFound('Water record not found');
+  }
+
+  if (existingRecord.userId.toString() !== req.user._id.toString()) {
+    throw new createHttpError.NotFound('Water record not found');
   }
 
   const updatedRecord = {
@@ -42,7 +44,18 @@ export const updateWaterAmountCtrl = async (req, res) => {
     value,
   };
 
-  const result = updateWaterAmount(updatedRecord);
+  const result = await updateWaterAmount(id, updatedRecord);
+  if (!result) {
+    throw new createHttpError.NotFound('Water record not found');
+  }
+
+  console.log(result);
+
+  res.status(200).send({
+    status: 200,
+    message: 'Water record updated successfully',
+    data: result,
+  });
 };
 
 export const deleteWaterAmountCtrl = async (req, res) => {
