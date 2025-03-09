@@ -20,42 +20,19 @@ properties:
     type: string
     enum: ['woman', 'man']
   weight:
-    description: 'User`s weight'
-    type: object
-    properties:
-      value:
-        description: 'Weight value'
-        type: number
-        example: 70
-      unit:
-        description: 'Weight unit'
-        type: string
-        example: 'kg'
+    type: string
+    description: 'User`s weight must be a positive number, not exceeding 500. Unit measurement is "kg" in data base '
+    example: 70
   dailySportTime:
-    type: object
-    description: 'User`s daily sport time'
-    properties:
-      value:
-        description: 'Daily sport time value'
-        type: number
-        example: 12
-      unit:
-        description: 'Daily sport time unit'
-        type: string
-        example: 'hours'
+    type: string
+    description: 'User`s daily sport time must be a positive number, not exceeding 24. Unit measurement is "hours" in data base '
+    example: 12
   dailyWaterNorm:
-    type: object
-    description: 'User`s daily water norm'
-    properties:
-      value:
-        description: 'Daily water norm value'
-        type: number
-        example: 1500
-      unit:
-        description: 'Daily water norm unit'
-        type: string
-        example: 'ml'
+    type: string
+    description: 'User`s daily water norm must be a positive number, not exceeding 15000. Unit measurement is "ml" in data base '
+    example: 1500
+
   avatar:
     description: "Link to user's avatar"
     type: string
-    example: https://res.cloudinary.com/dobkaq79k/image/upload/v1739270697/lz54yboqjkimsheddhoj.jpg
+    example: https://res.cloudinary.com/dobkaq79k/image/upload/example.img

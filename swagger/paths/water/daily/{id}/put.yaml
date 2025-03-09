@@ -1,0 +1,135 @@
+tags:
+  - Water
+summary: Update water consumption record
+operationId: updateRecord
+description: Update an existing water consumption record
+security:
+  - bearerAuth: []
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: 67cc39fc1f1e6b3a7afb57f0
+    description: The ID of the water record to update
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - date
+          - value
+        properties:
+          date:
+            type: string
+            example: '2025-03-07T14:30'
+          value:
+            type: number
+            minimum: 50
+            maximum: 5000
+            example: 500
+responses:
+  '200':
+    description: Water consumption record updated successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Water record updated successfully'
+            data:
+              type: object
+              properties:
+                userId:
+                  description: "User's id who owns the record"
+                  type: string
+                  example: '67cb1ae6f70ee5331ff1d50c'
+                date:
+                  description: 'Date and time of consumption'
+                  type: string
+                  example: '2025-03-07T14:30'
+                value:
+                  description: 'The amount of water consumed'
+                  type: number
+                  example: 500
+                _id:
+                  description: "Record's id"
+                  type: string
+                  example: '67cb1d5e131a73e6d77f1dfe'
+                createdAt:
+                  description: 'Timestamp when the record was created'
+                  type: string
+                  example: '2025-03-07T16:22:54.393Z'
+                updatedAt:
+                  description: 'Timestamp when the record was last updated'
+                  type: string
+                  example: '2025-03-07T16:22:54.393Z'
+  '400':
+    description: Bad Request - Validation error
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 400
+            message:
+              type: string
+              example: 'BadRequestError'
+            data:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: 'Bad Request'
+                errors:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example:
+                          - '(date) is required'
+                          - '(date) should be a string'
+                          - '(date) should be in follow format YYYY-MM-DDTHH:mm'
+                          - '(value) is required'
+                          - '(value) should be a number'
+                          - '(value) cannot be less than 50'
+                          - '(value) cannot be more than 5000'
+  '401':
+    description: Unauthorized - Authentication failed
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 401
+            message:
+              type: string
+              example: 'UnauthorizedError'
+            data:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - 'Session not found'
+                    - 'Please provide Authorization header'
+                    - 'Auth header should be of type Bearer'
+                    - 'Access token expired'
+  '404':
+    $ref: ../../../../components/responses/404-water.yaml
+  '500':
+    $ref: ../../../../components/responses/500.yaml
