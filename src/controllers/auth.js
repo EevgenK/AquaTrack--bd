@@ -111,9 +111,6 @@ export const updateCurrentDataController = async (req, res, next) => {
 export const loadAvatarController = async (req, res, next) => {
   const { _id: userId } = req.user;
   const avatar = req.file;
-  if (!avatar) {
-    throw createHttpError(400, 'Should be a file in request');
-  }
   const avatarUrl = await saveFileToUploadDir(avatar);
   const result = await updateData(userId, { avatar: avatarUrl });
 
