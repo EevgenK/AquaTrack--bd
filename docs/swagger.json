@@ -97,6 +97,9 @@
           },
           "409": {
             "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -621,7 +624,7 @@
             "$ref": "#/components/responses/404-user"
           },
           "500": {
-            "$ref": "#/components/responses/500"
+            "$ref": "#/components/responses/500-email"
           }
         }
       }
@@ -834,44 +837,7 @@
                       "example": "Successfully posted water record"
                     },
                     "data": {
-                      "type": "object",
-                      "properties": {
-                        "_id": {
-                          "description": "Record's id",
-                          "type": "string",
-                          "format": "ObjectId",
-                          "example": "67cb1d5e131a73e6d77f1dfe"
-                        },
-                        "userId": {
-                          "description": "User's id who owns the record",
-                          "type": "string",
-                          "format": "ObjectId",
-                          "example": "67cb1ae6f70ee5331ff1d50c"
-                        },
-                        "date": {
-                          "description": "Date and time of consumption",
-                          "type": "string",
-                          "format": "date-time",
-                          "example": "2025-03-07T14:30"
-                        },
-                        "value": {
-                          "description": "The amount of water consumed",
-                          "type": "number",
-                          "example": 500
-                        },
-                        "createdAt": {
-                          "description": "Timestamp when the record was created",
-                          "type": "string",
-                          "format": "date-time",
-                          "example": "2025-03-07T16:22:54.393Z"
-                        },
-                        "updatedAt": {
-                          "description": "Timestamp when the record was last updated",
-                          "type": "string",
-                          "format": "date-time",
-                          "example": "2025-03-07T16:22:54.393Z"
-                        }
-                      }
+                      "$ref": "#/components/schemas/water"
                     }
                   }
                 }
@@ -1035,39 +1001,7 @@
                       "example": "Water record updated successfully"
                     },
                     "data": {
-                      "type": "object",
-                      "properties": {
-                        "userId": {
-                          "description": "User's id who owns the record",
-                          "type": "string",
-                          "example": "67cb1ae6f70ee5331ff1d50c"
-                        },
-                        "date": {
-                          "description": "Date and time of consumption",
-                          "type": "string",
-                          "example": "2025-03-07T14:30"
-                        },
-                        "value": {
-                          "description": "The amount of water consumed",
-                          "type": "number",
-                          "example": 500
-                        },
-                        "_id": {
-                          "description": "Record's id",
-                          "type": "string",
-                          "example": "67cb1d5e131a73e6d77f1dfe"
-                        },
-                        "createdAt": {
-                          "description": "Timestamp when the record was created",
-                          "type": "string",
-                          "example": "2025-03-07T16:22:54.393Z"
-                        },
-                        "updatedAt": {
-                          "description": "Timestamp when the record was last updated",
-                          "type": "string",
-                          "example": "2025-03-07T16:22:54.393Z"
-                        }
-                      }
+                      "$ref": "#/components/schemas/water"
                     }
                   }
                 }
@@ -1409,6 +1343,7 @@
           "_id": {
             "description": "User`s id",
             "type": "string",
+            "format": "ObjectId",
             "example": "65e4decdd286b30065d54af9"
           },
           "email": {
@@ -1447,7 +1382,66 @@
           "avatar": {
             "description": "Link to user's avatar",
             "type": "string",
+            "format": "binary",
             "example": "https://res.cloudinary.com/dobkaq79k/image/upload/example.img"
+          },
+          "createdAt": {
+            "description": "Timestamp when user was created",
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-03-07T16:22:54.393Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "example": "2025-03-07T16:22:54.393Z",
+            "type": "string",
+            "description": "Timestamp when user was last updated"
+          }
+        }
+      },
+      "water": {
+        "type": "object",
+        "required": [
+          "_id",
+          "userId",
+          "date",
+          "value"
+        ],
+        "properties": {
+          "userId": {
+            "description": "User's id who owns the record",
+            "type": "string",
+            "format": "ObjectId",
+            "example": "67cb1ae6f70ee5331ff1d50c"
+          },
+          "date": {
+            "description": "Date of water intake. Should be in format \"YYYY-MM-DDTHH:MM\"",
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-03-07T14:30"
+          },
+          "value": {
+            "description": "Water daily value should be not less than 50 and not exceeding 5000. Unit measurement is \"ml\" in data base",
+            "type": "number",
+            "example": 1500
+          },
+          "_id": {
+            "description": "Record's id",
+            "type": "string",
+            "format": "ObjectId",
+            "example": "67cb1d5e131a73e6d77f1dfe"
+          },
+          "createdAt": {
+            "description": "Timestamp when the record was created",
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-03-07T16:22:54.393Z"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "example": "2025-03-07T16:22:54.393Z",
+            "type": "string",
+            "description": "Timestamp when the record was last updated"
           }
         }
       }
@@ -1622,7 +1616,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "Failed to send the email, please try again later."
+                      "example": "Something went wrong."
                     }
                   }
                 }
@@ -1734,6 +1728,44 @@
                     "message": {
                       "type": "string",
                       "example": "User`s data not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500-email": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "description": "HTTP error status.",
+                  "example": 500
+                },
+                "message": {
+                  "type": "string",
+                  "example": "InternalServerError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Failed to send the email, please try again later."
                     }
                   }
                 }
