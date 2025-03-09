@@ -21,4 +21,9 @@ export const getWaterDaily = async (userId, date) => {
   }).sort({ date: 1 });
 };
 
-export const getWaterMonthly = async (month) => {};
+export const getWaterMonthly = async (userId, month) => {
+  return await WaterCollection.find({
+    userId,
+    date: { $regex: `^${month}-` },
+  }).sort({ date: 1 });
+};
