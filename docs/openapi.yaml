@@ -44,17 +44,17 @@ paths:
   /auth/data-avatar-load:
     put:
       $ref: ../swagger/paths/auth/data-avatar-load/put.yaml
-  /water/daily:
+  /water:
     post:
-      $ref: ../swagger/paths/water/daily/post.yaml
-  /water/daily/{id}:
+      $ref: ../swagger/paths/water/post.yaml
+  /water/{id}:
     put:
-      $ref: ../swagger/paths/water/daily/{id}/put.yaml
+      $ref: ../swagger/paths/water/{id}/put.yaml
     delete:
-      $ref: ../swagger/paths/water/daily/{id}/delete.yaml
-  /water/daily/by-date/{date}:
+      $ref: ../swagger/paths/water/{id}/delete.yaml
+  /water/daily/{date}:
     get:
-      $ref: ../swagger/paths/water/daily/by-date/{date}/get.yaml
+      $ref: ../swagger/paths/water/daily/{date}/get.yaml
   /water/month/{month}:
     get:
       $ref: ../swagger/paths/water/monthly/{month}/get.yaml

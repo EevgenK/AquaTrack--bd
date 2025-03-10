@@ -1,18 +1,10 @@
 tags:
   - Water
-summary: Update water consumption record
-operationId: updateRecord
-description: Update an existing water consumption record
+summary: Create water consumption record
+operationId: createRecord
+description: Create a new record
 security:
   - bearerAuth: []
-parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: 67cc39fc1f1e6b3a7afb57f0
-    description: The ID of the water record to update
 requestBody:
   required: true
   content:
@@ -32,8 +24,8 @@ requestBody:
             maximum: 5000
             example: 500
 responses:
-  '200':
-    description: Water consumption record updated successfully
+  '201':
+    description: Water consumption record created successfully
     content:
       application/json:
         schema:
@@ -41,13 +33,12 @@ responses:
           properties:
             status:
               type: integer
-              example: 200
+              example: 201
             message:
               type: string
-              example: 'Water record updated successfully'
+              example: 'Successfully posted water record'
             data:
-              $ref: '../../../../components/schemas/water.yaml'
-
+              $ref: '../../components/schemas/water.yaml'
   '400':
     description: Bad Request - Validation error
     content:
@@ -105,7 +96,5 @@ responses:
                     - 'Please provide Authorization header'
                     - 'Auth header should be of type Bearer'
                     - 'Access token expired'
-  '404':
-    $ref: ../../../../components/responses/404-water.yaml
   '500':
-    $ref: ../../../../components/responses/500.yaml
+    $ref: ../../components/responses/500.yaml
