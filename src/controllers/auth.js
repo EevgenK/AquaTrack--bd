@@ -16,6 +16,7 @@ import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 import { generateAuthUrl } from '../utils/googleOAuthClient.js';
 import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 import { getEnvVar } from '../utils/getEnvVar.js';
+import { getFileUrlByFeatureFlag } from '../utils/getFileUrlByFeatureFlag.js';
 
 export const registerUserController = async (req, res, next) => {
   const user = await registerUser(req.body);
@@ -103,26 +104,7 @@ export const resetPasswordController = async (req, res) => {
 
 export const updateCurrentDataController = async (req, res, next) => {
   const { _id: userId } = req.user;
-  const avatar = req.file;
-
-  let avatarUrl;
-
-  if (avatar) {
-    if (getEnvVar('ENABLE_CLOUDINARY') === 'true') {
-      avatarUrl = await saveFileToCloudinary(avatar);
-    } else {
-      avatarUrl = await saveFileToUploadDir(avatar);
-    }
-  }
-
-  const result = await updateData(userId, {
-    ...req.body,
-    avatar: avatarUrl,
-  });
-  if (!result) {
-    next(createHttpError(404, 'Student not found'));
-    return;
-  }
+  const result = await updateData(userId, req.body);
 
   res.json({
     status: 200,
@@ -135,18 +117,8 @@ export const loadAvatarController = async (req, res, next) => {
   const { _id: userId } = req.user;
   const avatar = req.file;
 
-  let avatarUrl;
-
-  if (avatar) {
-    if (getEnvVar('ENABLE_CLOUDINARY') === 'true') {
-      avatarUrl = await saveFileToCloudinary(avatar);
-    } else {
-      avatarUrl = await saveFileToUploadDir(avatar);
-    }
-  }
-
+  const avatarUrl = await getFileUrlByFeatureFlag(avatar, 'ENABLE_CLOUDINARY');
   const result = await updateData(userId, { avatar: avatarUrl });
-
   res.json({
     status: 200,
     message: `Successfully updated user's avatar!`,
