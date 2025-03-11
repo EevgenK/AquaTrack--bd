@@ -58,6 +58,6 @@ responses:
                     - 'Auth header should be of type Bearer'
                     - 'Access token expired'
   '404':
-    $ref: ../../../../components/responses/404-water.yaml
+    $ref: ../../../components/responses/404-water.yaml
   '500':
-    $ref: ../../../../components/responses/500.yaml
+    $ref: ../../../components/responses/500.yaml

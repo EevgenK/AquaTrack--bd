@@ -1,18 +1,36 @@
 type: object
 required:
+  - _id
   - userId
   - date
   - value
 properties:
   userId:
-    description: 'User`s id'
+    description: "User's id who owns the record"
     type: string
-    example: 65e4decdd286b30065d54af9
+    format: ObjectId
+    example: '67cb1ae6f70ee5331ff1d50c'
   date:
     description: 'Date of water intake. Should be in format "YYYY-MM-DDTHH:MM"'
     type: string
-    example: '08-03-2025'
+    format: date-time
+    example: '2025-03-07T14:30'
   value:
     description: 'Water daily value should be not less than 50 and not exceeding 5000. Unit measurement is "ml" in data base'
     type: number
     example: 1500
+  _id:
+    description: "Record's id"
+    type: string
+    format: ObjectId
+    example: '67cb1d5e131a73e6d77f1dfe'
+  createdAt:
+    description: 'Timestamp when the record was created'
+    type: string
+    format: date-time
+    example: '2025-03-07T16:22:54.393Z'
+  updatedAt:
+    format: date-time
+    example: '2025-03-07T16:22:54.393Z'
+    type: string
+    description: 'Timestamp when the record was last updated'

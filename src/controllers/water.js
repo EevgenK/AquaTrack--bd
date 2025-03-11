@@ -86,4 +86,15 @@ export const getWaterDailyCtrl = async (req, res) => {
   });
 };
 
-export const getWaterMonthlyCtrl = async (req, res) => {};
+export const getWaterMonthlyCtrl = async (req, res) => {
+  const { month } = req.params;
+  const userId = req.user._id;
+
+  const records = await getWaterMonthly(userId, month);
+
+  res.status(200).send({
+    status: 200,
+    message: `Successfully fetched water records for ${month}`,
+    data: records,
+  });
+};

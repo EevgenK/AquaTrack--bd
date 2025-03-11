@@ -1,0 +1,59 @@
+tags:
+  - Water
+summary: Get water records for a specific month
+operationId: getWaterMonthly
+description: Retrieve an array of water consumption records sorted in chronological order.
+security:
+  - bearerAuth: []
+parameters:
+  - name: month
+    in: path
+    required: true
+    description: The date to look for records in (YYYY-MM)
+    schema:
+      type: string
+responses:
+  '200':
+    description: Successfully fetched water consumption records sorted from earliest to latest.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: 'Successfully fetched water records for 2025-03'
+            data:
+              type: array
+              description: List of water consumption records sorted by time (earliest to latest).
+              items:
+                $ref: ../../../../components/schemas/water.yaml
+  # '400':
+  '401':
+    description: Unauthorized - Authentication failed
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 401
+            message:
+              type: string
+              example: 'UnauthorizedError'
+            data:
+              type: object
+              properties:
+                message:
+                  type: string
+                  enum:
+                    - 'Session not found'
+                    - 'Please provide Authorization header'
+                    - 'Auth header should be of type Bearer'
+                    - 'Access token expired'
+  '404':
+    $ref: ../../../../components/responses/404-month.yaml

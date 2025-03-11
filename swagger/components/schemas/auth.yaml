@@ -6,6 +6,7 @@ properties:
   _id:
     description: 'User`s id'
     type: string
+    format: ObjectId
     example: 65e4decdd286b30065d54af9
   email:
     description: 'User`s email'
@@ -31,8 +32,18 @@ properties:
     type: string
     description: 'User`s daily water norm must be a positive number, not exceeding 15000. Unit measurement is "ml" in data base '
     example: 1500
-
   avatar:
     description: "Link to user's avatar"
     type: string
+    format: binary
     example: https://res.cloudinary.com/dobkaq79k/image/upload/example.img
+  createdAt:
+    description: 'Timestamp when user was created'
+    type: string
+    format: date-time
+    example: '2025-03-07T16:22:54.393Z'
+  updatedAt:
+    format: date-time
+    example: '2025-03-07T16:22:54.393Z'
+    type: string
+    description: 'Timestamp when user was last updated'
