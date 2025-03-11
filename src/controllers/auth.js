@@ -9,9 +9,11 @@ import {
   resetPassword,
   requestResetToken,
   updateData,
+  loginOrSignupWithGoogle,
 } from '../services/auth.js';
 import { setupSession } from '../utils/createSessions.js';
 import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
+import { generateAuthUrl } from '../utils/googleOAuthClient.js';
 
 export const registerUserController = async (req, res, next) => {
   const user = await registerUser(req.body);
@@ -99,6 +101,7 @@ export const resetPasswordController = async (req, res) => {
 
 export const updateCurrentDataController = async (req, res, next) => {
   const { _id: userId } = req.user;
+
   const result = await updateData(userId, req.body);
 
   res.json({
@@ -118,5 +121,30 @@ export const loadAvatarController = async (req, res, next) => {
     status: 200,
     message: `Successfully updated user's avatar!`,
     data: result.data.avatar,
+  });
+};
+
+export const getGoogleOAuthUrlController = async (req, res) => {
+  const url = generateAuthUrl();
+  res.json({
+    status: 200,
+    message: 'Successfully get Google OAuth url!',
+    data: {
+      url,
+    },
+  });
+};
+
+export const loginWithGoogleController = async (req, res) => {
+  const session = await loginOrSignupWithGoogle(req.body.code);
+  if (!session) throw new Error('Session creation failed');
+  setupSession(res, session);
+
+  res.json({
+    status: 200,
+    message: 'Successfully logged in via Google OAuth!',
+    data: {
+      accessToken: session.accessToken,
+    },
   });
 };
