@@ -21,7 +21,12 @@ export const setupServer = () => {
     }),
   );
 
-  app.use(cors());
+  app.use(
+    cors({
+      origin: 'http://localhost:5173',
+      credentials: true,
+    }),
+  );
   app.use(
     pino({
       transport: {
