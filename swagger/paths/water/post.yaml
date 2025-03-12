@@ -43,61 +43,8 @@ responses:
             data:
               $ref: '../../components/schemas/water.yaml'
   '400':
-    description: Bad Request - Validation error
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            status:
-              type: integer
-              example: 400
-            message:
-              type: string
-              example: 'BadRequestError'
-            data:
-              type: object
-              properties:
-                message:
-                  type: string
-                  example: 'Bad Request'
-                errors:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      message:
-                        type: string
-                        example:
-                          - '(date) is required'
-                          - '(date) should be a string'
-                          - '(date) should be in follow format YYYY-MM-DDTHH:mm'
-                          - '(value) is required'
-                          - '(value) should be a number'
-                          - '(value) cannot be less than 50'
-                          - '(value) cannot be more than 5000'
+    $ref: ../../components/responses/400-water-data.yaml
   '401':
-    description: Unauthorized - Authentication failed
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            status:
-              type: integer
-              example: 401
-            message:
-              type: string
-              example: 'UnauthorizedError'
-            data:
-              type: object
-              properties:
-                message:
-                  type: string
-                  enum:
-                    - 'Session not found'
-                    - 'Please provide Authorization header'
-                    - 'Auth header should be of type Bearer'
-                    - 'Access token expired'
+    $ref: ../../components/responses/401-water.yaml
   '500':
     $ref: ../../components/responses/500.yaml

@@ -31,9 +31,8 @@ responses:
               description: List of water consumption records sorted by time (earliest to latest).
               items:
                 $ref: ../../../../components/schemas/water.yaml
-  # '400':
-  '401':
-    description: Unauthorized - Authentication failed
+  '400':
+    description: Bad Request - Invalid date format
     content:
       application/json:
         schema:
@@ -41,19 +40,17 @@ responses:
           properties:
             status:
               type: integer
-              example: 401
+              example: 400
             message:
               type: string
-              example: 'UnauthorizedError'
+              example: 'BadRequestError'
             data:
               type: object
               properties:
                 message:
                   type: string
-                  enum:
-                    - 'Session not found'
-                    - 'Please provide Authorization header'
-                    - 'Auth header should be of type Bearer'
-                    - 'Access token expired'
+                  example: 'Invalid date format. Expected YYYY-MM-DD'
+  '401':
+    $ref: ../../../../components/responses/401-water.yaml
   '404':
     $ref: ../../../../components/responses/404-date.yaml

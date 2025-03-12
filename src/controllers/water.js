@@ -1,4 +1,5 @@
 import createHttpError from 'http-errors';
+import moment from 'moment';
 
 import {
   postWaterAmount,
@@ -75,6 +76,10 @@ export const deleteWaterAmountCtrl = async (req, res) => {
 
 export const getWaterDailyCtrl = async (req, res) => {
   const { date } = req.params;
+  if (!moment(date, 'YYYY-MM-DD', true).isValid()) {
+    throw createHttpError(400, 'Invalid date format. Expected: YYYY-MM-DD');
+  }
+
   const userId = req.user._id;
 
   const records = await getWaterDaily(userId, date);
@@ -88,6 +93,10 @@ export const getWaterDailyCtrl = async (req, res) => {
 
 export const getWaterMonthlyCtrl = async (req, res) => {
   const { month } = req.params;
+  if (!moment(month, 'YYYY-MM', true).isValid()) {
+    throw createHttpError(400, 'Invalid date format. Expected: YYYY-MM');
+  }
+
   const userId = req.user._id;
 
   const records = await getWaterMonthly(userId, month);

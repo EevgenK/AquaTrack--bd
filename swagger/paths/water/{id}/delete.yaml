@@ -35,28 +35,7 @@ responses:
                   type: string
                   example: 'Invalid id format'
   '401':
-    description: Unauthorized - Authentication failed
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            status:
-              type: integer
-              example: 401
-            message:
-              type: string
-              example: 'UnauthorizedError'
-            data:
-              type: object
-              properties:
-                message:
-                  type: string
-                  enum:
-                    - 'Session not found'
-                    - 'Please provide Authorization header'
-                    - 'Auth header should be of type Bearer'
-                    - 'Access token expired'
+    $ref: ../../../components/responses/401-water.yaml
   '404':
     $ref: ../../../components/responses/404-water.yaml
   '500':
