@@ -1,0 +1,39 @@
+tags:
+  - Auth
+summary: Get current user's data
+operationId: generateAuthUrl
+description: Get all current user's data
+security: []
+responses:
+  '200':
+    description: 'Get OAuth URL'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully get Google OAuth url!
+            data:
+              type: object
+              required:
+                - url
+              properties:
+                properties:
+                url:
+                  type: string
+                  example: 'https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&response_type=code&client_id=603979132422-91c7c1bsdpq24aj74e50fh07vkgj4tft.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Faquatrack-bd.onrender.com%2Fapi-docs%2Fget-oauth-url'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404-user.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'
