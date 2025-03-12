@@ -15,6 +15,7 @@ requestBody:
           code:
             description: 'login Ticket'
             type: string
+            example: '4/0ASVgi3KsuZ-YSlj5pArCaunUrsVzdpfpowM-jblSY743wFmFsC6Bq-buc6WZf0LRT2StkO'
 responses:
   '200':
     description: Successfully logged in via Google OAuth!

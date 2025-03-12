@@ -21,3 +21,5 @@ export const CLOUDINARY = {
   API_KEY: 'API_KEY',
   API_SECRET: 'API_SECRET',
 };
+
+export const ORIGINSALLOWED = ['http://localhost:5173'];

@@ -13,8 +13,9 @@ requestBody:
           - email
         properties:
           email:
-            description: 'User Email'
+            description: "User's email should have at least 'two' domain segments separated by a dot."
             type: string
+            example: 'example@domain.com'
 responses:
   '200':
     description: Reset password email was successfully sent!

@@ -10,8 +10,14 @@ import router from './routers/index.js';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { swaggerDocs } from './middlewares/swaggerDocs.js';
 import { UPLOAD_DIR } from './constants/index.js';
+import { checkCorsOrigin } from './utils/checkCorsOrigin.js';
 
 const PORT = Number(getEnvVar('PORT', '4000'));
+const corsOptions = {
+  origin: checkCorsOrigin,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  credentials: true,
+};
 
 export const setupServer = () => {
   const app = express();
@@ -21,12 +27,8 @@ export const setupServer = () => {
     }),
   );
 
-  app.use(
-    cors({
-      origin: 'http://localhost:5173',
-      credentials: true,
-    }),
-  );
+  app.use('/api-docs', swaggerDocs());
+  app.use(cors(corsOptions));
   app.use(
     pino({
       transport: {
@@ -38,7 +40,6 @@ export const setupServer = () => {
   app.get('/', domainHandler);
   app.use(router);
   app.use('/uploads', express.static(UPLOAD_DIR));
-  app.use('/api-docs', swaggerDocs());
   app.use('*', notFoundHandler);
   app.use(errorHandler);
 

@@ -18,6 +18,8 @@ properties:
   value:
     description: 'Water daily value should be not less than 50 and not exceeding 5000. Unit measurement is "ml" in data base'
     type: number
+    minimum: 50
+    maximum: 5000
     example: 1500
   _id:
     description: "Record's id"

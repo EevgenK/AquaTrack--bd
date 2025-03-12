@@ -24,10 +24,13 @@ requestBody:
           - value
         properties:
           date:
+            description: 'Date of water intake. Should be in format "YYYY-MM-DDTHH:MM"'
             type: string
+            format: date-time
             example: '2025-03-07T14:30'
           value:
             type: number
+            description: 'Water daily value should be not less than 50 and not exceeding 5000. Unit measurement is "ml" in data base'
             minimum: 50
             maximum: 5000
             example: 500

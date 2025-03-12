@@ -124,12 +124,14 @@
                 ],
                 "properties": {
                   "email": {
-                    "description": "User Email",
-                    "type": "string"
+                    "description": "User's email should have at least 'two' domain segments separated by a dot.",
+                    "type": "string",
+                    "example": "example@domain.com"
                   },
                   "password": {
-                    "description": "User Password",
-                    "type": "string"
+                    "description": "The user's password can consist of both letters and numbers.",
+                    "type": "string",
+                    "example": "123df123"
                   }
                 }
               }
@@ -174,8 +176,8 @@
               }
             }
           },
-          "401": {
-            "$ref": "#/components/responses/401"
+          "400": {
+            "$ref": "#/components/responses/400"
           },
           "404": {
             "$ref": "#/components/responses/404-user"
@@ -576,8 +578,9 @@
                 ],
                 "properties": {
                   "email": {
-                    "description": "User Email",
-                    "type": "string"
+                    "description": "User's email should have at least 'two' domain segments separated by a dot.",
+                    "type": "string",
+                    "example": "example@domain.com"
                   }
                 }
               }
@@ -781,6 +784,144 @@
         }
       }
     },
+    "/auth/confirm-oauth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Confirm OAuth",
+        "operationId": "loginOrSignUpWithGoogle",
+        "description": "Confirm login Or SignUp With Google",
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "code"
+                ],
+                "properties": {
+                  "code": {
+                    "description": "login Ticket",
+                    "type": "string",
+                    "example": "4/0ASVgi3KsuZ-YSlj5pArCaunUrsVzdpfpowM-jblSY743wFmFsC6Bq-buc6WZf0LRT2StkO"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully logged in via Google OAuth!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully logged in via Google OAuth!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "accessToken"
+                      ],
+                      "properties": {
+                        "accessToken": {
+                          "type": "string",
+                          "example": "IjwqHilOmfp8v0acuSSTuiEsYDH4e4CuOY84Wvxf"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404-user"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/get-oauth-url": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Get current user's data",
+        "operationId": "generateAuthUrl",
+        "description": "Get all current user's data",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Get OAuth URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully get Google OAuth url!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "url"
+                      ],
+                      "properties": {
+                        "properties": null,
+                        "url": {
+                          "type": "string",
+                          "example": "https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&response_type=code&client_id=603979132422-91c7c1bsdpq24aj74e50fh07vkgj4tft.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Faquatrack-bd.onrender.com%2Fapi-docs%2Fget-oauth-url"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404-user"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
     "/water": {
       "post": {
         "tags": [
@@ -806,11 +947,14 @@
                 ],
                 "properties": {
                   "date": {
+                    "description": "Date of water intake. Should be in format \"YYYY-MM-DDTHH:MM\"",
                     "type": "string",
+                    "format": "date-time",
                     "example": "2025-03-07T14:30"
                   },
                   "value": {
                     "type": "number",
+                    "description": "Water daily value should be not less than 50 and not exceeding 5000. Unit measurement is \"ml\" in data base",
                     "minimum": 50,
                     "maximum": 5000,
                     "example": 500
@@ -970,11 +1114,14 @@
                 ],
                 "properties": {
                   "date": {
+                    "description": "Date of water intake. Should be in format \"YYYY-MM-DDTHH:MM\"",
                     "type": "string",
+                    "format": "date-time",
                     "example": "2025-03-07T14:30"
                   },
                   "value": {
                     "type": "number",
+                    "description": "Water daily value should be not less than 50 and not exceeding 5000. Unit measurement is \"ml\" in data base",
                     "minimum": 50,
                     "maximum": 5000,
                     "example": 500
@@ -1481,6 +1628,8 @@
           "value": {
             "description": "Water daily value should be not less than 50 and not exceeding 5000. Unit measurement is \"ml\" in data base",
             "type": "number",
+            "minimum": 50,
+            "maximum": 5000,
             "example": 1500
           },
           "_id": {

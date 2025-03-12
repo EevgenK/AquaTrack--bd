@@ -47,6 +47,7 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.10.0",
     "pino-http": "^10.4.0",
+    "swagger-themes": "^1.4.3",
     "swagger-ui-express": "^5.0.1"
   }
 }
