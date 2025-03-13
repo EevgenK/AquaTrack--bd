@@ -104,7 +104,10 @@ export const requestResetToken = async (email) => {
   const template = handlebars.compile(templateSource);
   const html = template({
     name: user.name,
-    link: `${getEnvVar('APP_DOMAIN')}/reset-password?token=${resetToken}`,
+    link: `http://localhost:5173/change-pwd?token=${resetToken}
+    `,
+    /*`${getEnvVar('APP_DOMAIN')}/reset-password?token=${resetToken}
+    `*/
   });
   console.log('LINK==>>', html.link);
   try {

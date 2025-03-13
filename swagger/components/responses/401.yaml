@@ -1,4 +1,4 @@
-description: Unauthorized error
+description: Unauthorized - Authentication failed
 content:
   application/json:
     schema:
@@ -13,12 +13,19 @@ content:
           example: 401
         message:
           type: string
-          example: UnauthorizedError
+          example: 'UnauthorizedError'
         data:
           type: object
-          required:
-            - message
           properties:
             message:
               type: string
-              example: 'Access token expired'
+              enum:
+                - 'Session not found'
+                - 'Please provide Authorization header'
+                - 'Auth header should be of type Bearer'
+                - 'Access token expired'
+              example:
+                - 'Session not found'
+                - 'Please provide Authorization header'
+                - 'Auth header should be of type Bearer'
+                - 'Access token expired'

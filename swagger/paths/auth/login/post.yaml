@@ -48,7 +48,7 @@ responses:
                   type: string
                   example: '/UGIArv7wPULCiyYg6OwHQvIHeYjtdwO4n5i+WTW'
   '400':
-    $ref: ../../../components/responses/400.yaml
+    $ref: ../../../components/responses/400-auth.yaml
   '404':
     $ref: '../../../components/responses/404-user.yaml'
   '500':

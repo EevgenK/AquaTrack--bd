@@ -22,7 +22,7 @@ export const createCommonStringValidation = (
   }
   return validation;
 };
-/*MAKES JOY VALIDATION FOR elements type:number which are тще required & and have min, max values */
+/*MAKES JOY VALIDATION FOR elements type:number which are required & and have min, max values */
 export const createNumberValidation = (
   element,
   required,

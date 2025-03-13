@@ -1,0 +1,80 @@
+description: Bad Request Error
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: BadRequestError
+        data:
+          type: object
+          required:
+            - message
+          properties:
+            message:
+              type: string
+              example: 'Bad Request'
+            errors:
+              type: array
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "
+                      'password is required'
+                      | 'password value should be a string'
+                      | 'password should have at least 3 characters'
+                      | 'password should have not more than 50 characters'
+                      | 'email is required'
+                      | 'email value should be a string'
+                      | 'email should have at least 3 characters'
+                      | 'email should have not more than 50 characters'"
+                  path:
+                    type: array
+                    items:
+                      type: string
+                      description: shows the reason name of error
+                    example: ['password', 'email']
+                  type:
+                    type: string
+                    description: shows the reason of error
+                    example: "'string.min'|'string.max'|'string.base'|'any.required'"
+                  context:
+                    type: object
+                    required:
+                      - label
+                      - key
+                    properties:
+                      limit:
+                        type: number
+                        description: The limit of value
+                        minimum: 3
+                        maximum: 50
+                      value:
+                        type: string
+                        description: shows the request value
+                      label:
+                        type: string
+                        oneOf:
+                          - type: string
+                            example: password
+                          - type: string
+                            example: email
+                        example: "'password' | 'email'"
+                      key:
+                        type: string
+                        oneOf:
+                          - type: string
+                            example: password
+                          - type: string
+                            example: email
+                        example: "'password' | 'email'"

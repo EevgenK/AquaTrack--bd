@@ -45,6 +45,6 @@ responses:
   '409':
     $ref: '../../../components/responses/409.yaml'
   '400':
-    $ref: ../../../components/responses/400.yaml
+    $ref: '../../../components/responses/400-auth.yaml'
   '500':
     $ref: ../../../components/responses/500.yaml

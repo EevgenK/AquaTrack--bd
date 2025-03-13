@@ -93,7 +93,7 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "$ref": "#/components/responses/400-auth"
           },
           "409": {
             "$ref": "#/components/responses/409"
@@ -177,7 +177,7 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "$ref": "#/components/responses/400-auth"
           },
           "404": {
             "$ref": "#/components/responses/404-user"
@@ -989,87 +989,10 @@
             }
           },
           "400": {
-            "description": "Bad Request - Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 400
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "BadRequestError"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "example": "Bad Request"
-                        },
-                        "errors": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "message": {
-                                "type": "string",
-                                "example": [
-                                  "(date) is required",
-                                  "(date) should be a string",
-                                  "(date) should be in follow format YYYY-MM-DDTHH:mm",
-                                  "(value) is required",
-                                  "(value) should be a number",
-                                  "(value) cannot be less than 50",
-                                  "(value) cannot be more than 5000"
-                                ]
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/400-water-data"
           },
           "401": {
-            "description": "Unauthorized - Authentication failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 401
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "UnauthorizedError"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "enum": [
-                            "Session not found",
-                            "Please provide Authorization header",
-                            "Auth header should be of type Bearer",
-                            "Access token expired"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/401"
           },
           "500": {
             "$ref": "#/components/responses/500"
@@ -1156,87 +1079,10 @@
             }
           },
           "400": {
-            "description": "Bad Request - Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 400
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "BadRequestError"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "example": "Bad Request"
-                        },
-                        "errors": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "message": {
-                                "type": "string",
-                                "example": [
-                                  "(date) is required",
-                                  "(date) should be a string",
-                                  "(date) should be in follow format YYYY-MM-DDTHH:mm",
-                                  "(value) is required",
-                                  "(value) should be a number",
-                                  "(value) cannot be less than 50",
-                                  "(value) cannot be more than 5000"
-                                ]
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/400-water-data"
           },
           "401": {
-            "description": "Unauthorized - Authentication failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 401
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "UnauthorizedError"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "enum": [
-                            "Session not found",
-                            "Please provide Authorization header",
-                            "Auth header should be of type Bearer",
-                            "Access token expired"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/401"
           },
           "404": {
             "$ref": "#/components/responses/404-water"
@@ -1303,38 +1149,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized - Authentication failed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 401
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "UnauthorizedError"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "message": {
-                          "type": "string",
-                          "enum": [
-                            "Session not found",
-                            "Please provide Authorization header",
-                            "Auth header should be of type Bearer",
-                            "Access token expired"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "$ref": "#/components/responses/401"
           },
           "404": {
             "$ref": "#/components/responses/404-water"
@@ -1397,8 +1212,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized - Authentication failed",
+          "400": {
+            "description": "Bad Request - Invalid date format",
             "content": {
               "application/json": {
                 "schema": {
@@ -1406,23 +1221,18 @@
                   "properties": {
                     "status": {
                       "type": "integer",
-                      "example": 401
+                      "example": 400
                     },
                     "message": {
                       "type": "string",
-                      "example": "UnauthorizedError"
+                      "example": "BadRequestError"
                     },
                     "data": {
                       "type": "object",
                       "properties": {
                         "message": {
                           "type": "string",
-                          "enum": [
-                            "Session not found",
-                            "Please provide Authorization header",
-                            "Auth header should be of type Bearer",
-                            "Access token expired"
-                          ]
+                          "example": "Invalid date format. Expected YYYY-MM-DD"
                         }
                       }
                     }
@@ -1430,6 +1240,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
           },
           "404": {
             "$ref": "#/components/responses/404-date"
@@ -1489,8 +1302,8 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized - Authentication failed",
+          "400": {
+            "description": "Bad Request - Invalid date format",
             "content": {
               "application/json": {
                 "schema": {
@@ -1498,23 +1311,18 @@
                   "properties": {
                     "status": {
                       "type": "integer",
-                      "example": 401
+                      "example": 400
                     },
                     "message": {
                       "type": "string",
-                      "example": "UnauthorizedError"
+                      "example": "BadRequestError"
                     },
                     "data": {
                       "type": "object",
                       "properties": {
                         "message": {
                           "type": "string",
-                          "enum": [
-                            "Session not found",
-                            "Please provide Authorization header",
-                            "Auth header should be of type Bearer",
-                            "Access token expired"
-                          ]
+                          "example": "Invalid date format. Expected YYYY-MM"
                         }
                       }
                     }
@@ -1522,6 +1330,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
           },
           "404": {
             "$ref": "#/components/responses/404-month"
@@ -1696,7 +1507,7 @@
         }
       },
       "401": {
-        "description": "Unauthorized error",
+        "description": "Unauthorized - Authentication failed",
         "content": {
           "application/json": {
             "schema": {
@@ -1717,13 +1528,21 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "Access token expired"
+                      "enum": [
+                        "Session not found",
+                        "Please provide Authorization header",
+                        "Auth header should be of type Bearer",
+                        "Access token expired"
+                      ],
+                      "example": [
+                        "Session not found",
+                        "Please provide Authorization header",
+                        "Auth header should be of type Bearer",
+                        "Access token expired"
+                      ]
                     }
                   }
                 }
@@ -1824,6 +1643,118 @@
                     "message": {
                       "type": "string",
                       "example": "Something went wrong."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400-auth": {
+        "description": "Bad Request Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "BadRequestError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Bad Request"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": " 'password is required' | 'password value should be a string' | 'password should have at least 3 characters' | 'password should have not more than 50 characters' | 'email is required' | 'email value should be a string' | 'email should have at least 3 characters' | 'email should have not more than 50 characters'"
+                          },
+                          "path": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "description": "shows the reason name of error"
+                            },
+                            "example": [
+                              "password",
+                              "email"
+                            ]
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "shows the reason of error",
+                            "example": "'string.min'|'string.max'|'string.base'|'any.required'"
+                          },
+                          "context": {
+                            "type": "object",
+                            "required": [
+                              "label",
+                              "key"
+                            ],
+                            "properties": {
+                              "limit": {
+                                "type": "number",
+                                "description": "The limit of value",
+                                "minimum": 3,
+                                "maximum": 50
+                              },
+                              "value": {
+                                "type": "string",
+                                "description": "shows the request value"
+                              },
+                              "label": {
+                                "type": "string",
+                                "oneOf": [
+                                  {
+                                    "type": "string",
+                                    "example": "password"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "example": "email"
+                                  }
+                                ],
+                                "example": "'password' | 'email'"
+                              },
+                              "key": {
+                                "type": "string",
+                                "oneOf": [
+                                  {
+                                    "type": "string",
+                                    "example": "password"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "example": "email"
+                                  }
+                                ],
+                                "example": "'password' | 'email'"
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -1973,6 +1904,55 @@
                     "message": {
                       "type": "string",
                       "example": "Failed to send the email, please try again later."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400-water-data": {
+        "description": "Bad Request - Validation error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "BadRequestError"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Bad Request"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "example": [
+                              "(date) is required",
+                              "(date) should be a string",
+                              "(date) should be in follow format YYYY-MM-DDTHH:mm",
+                              "(value) is required",
+                              "(value) should be a number",
+                              "(value) cannot be less than 50",
+                              "(value) cannot be more than 5000"
+                            ]
+                          }
+                        }
+                      }
                     }
                   }
                 }

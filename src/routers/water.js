@@ -15,6 +15,7 @@ import {
   getWaterDailyCtrl,
   getWaterMonthlyCtrl,
 } from '../controllers/water.js';
+import { isValidDate } from '../middlewares/isValidDate.js';
 
 const router = express.Router();
 const jsonParser = express.json();
@@ -36,7 +37,15 @@ router.put(
 );
 router.delete('/:id', isValidObjId, ctrlWrapper(deleteWaterAmountCtrl));
 
-router.get('/daily/:date', ctrlWrapper(getWaterDailyCtrl));
-router.get('/monthly/:month', ctrlWrapper(getWaterMonthlyCtrl));
+router.get(
+  '/daily/:date',
+  isValidDate('YYYY-MM-DD'),
+  ctrlWrapper(getWaterDailyCtrl),
+);
+router.get(
+  '/monthly/:month',
+  isValidDate('YYYY-MM'),
+  ctrlWrapper(getWaterMonthlyCtrl),
+);
 
 export default router;
