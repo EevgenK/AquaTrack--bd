@@ -61,7 +61,7 @@ paths:
   /water/daily/{date}:
     get:
       $ref: ../swagger/paths/water/daily/{date}/get.yaml
-  /water/month/{month}:
+  /water/monthly/{month}:
     get:
       $ref: ../swagger/paths/water/monthly/{month}/get.yaml
 components:
