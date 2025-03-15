@@ -29,25 +29,46 @@ content:
                 properties:
                   message:
                     type: string
-                    example: "
-                      'password is required'
-                      | 'password value should be a string'
-                      | 'password should have at least 3 characters'
-                      | 'password should have not more than 50 characters'
-                      | 'email is required'
-                      | 'email value should be a string'
-                      | 'email should have at least 3 characters'
-                      | 'email should have not more than 50 characters'"
+                    description: Errors`s details
+                    oneOf:
+                      - type: string
+                        example: 'password is required'
+                      - type: string
+                        example: 'password should have at least 3 characters'
+                      - type: string
+                        example: 'password should have not more than 50 characters'
+                      - type: string
+                        example: 'email is required'
+                      - type: string
+                        example: 'email value should be a string'
+                      - type: string
+                        example: 'email should have at least 3 characters'
+                      - type: string
+                        example: 'email should have not more than 50 characters'
+                      - type: string
+                        example: 'password value should be a string'
                   path:
                     type: array
                     items:
                       type: string
                       description: shows the reason name of error
-                    example: ['password', 'email']
+                      oneOf:
+                        - type: string
+                          example: password
+                        - type: string
+                          example: email
                   type:
                     type: string
                     description: shows the reason of error
-                    example: "'string.min'|'string.max'|'string.base'|'any.required'"
+                    oneOf:
+                      - type: string
+                        example: string.min
+                      - type: string
+                        example: string.max
+                      - type: string
+                        example: string.base
+                      - type: string
+                        example: any.required
                   context:
                     type: object
                     required:
@@ -69,7 +90,6 @@ content:
                             example: password
                           - type: string
                             example: email
-                        example: "'password' | 'email'"
                       key:
                         type: string
                         oneOf:
@@ -77,4 +97,3 @@ content:
                             example: password
                           - type: string
                             example: email
-                        example: "'password' | 'email'"

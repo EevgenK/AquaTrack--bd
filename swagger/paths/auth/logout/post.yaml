@@ -7,17 +7,7 @@ security: []
 
 responses:
   '204':
-    description: Logout user from system
-    content:
-      application/json:
-        schema:
-          type: object
-          required:
-            - status
-          properties:
-            status:
-              type: integer
-              example: 204
+    description: 'No Content'
   '401':
     $ref: '../../../components/responses/401.yaml'
   '500':

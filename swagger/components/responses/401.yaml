@@ -19,13 +19,12 @@ content:
           properties:
             message:
               type: string
-              enum:
-                - 'Session not found'
-                - 'Please provide Authorization header'
-                - 'Auth header should be of type Bearer'
-                - 'Access token expired'
-              example:
-                - 'Session not found'
-                - 'Please provide Authorization header'
-                - 'Auth header should be of type Bearer'
-                - 'Access token expired'
+              oneOf:
+                - type: string
+                  example: Session not found
+                - type: string
+                  example: Please provide Authorization header
+                - type: string
+                  example: Auth header should be of type Bearer
+                - type: string
+                  example: Access token expired

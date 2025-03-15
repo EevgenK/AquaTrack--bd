@@ -39,9 +39,13 @@ router.post(
   ctrlWrapper(loginUserController),
 );
 
-router.post('/logout', ctrlWrapper(logoutUserController));
+router.post('/logout', authenticate, ctrlWrapper(logoutUserController));
 
-router.post('/refresh', ctrlWrapper(refreshUserSessionController));
+router.post(
+  '/refresh',
+  authenticate,
+  ctrlWrapper(refreshUserSessionController),
+);
 
 router.get('/data', authenticate, ctrlWrapper(getCurrentDataController));
 
