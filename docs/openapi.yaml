@@ -12,8 +12,8 @@ tags:
   - name: Auth
     description: Auth operations.
 servers:
-  - url: http://localhost:4000
   - url: https://aquatrack-bd.onrender.com
+  - url: http://localhost:4000
 paths:
   /auth/register:
     post:

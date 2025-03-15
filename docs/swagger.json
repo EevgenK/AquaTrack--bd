@@ -11,10 +11,10 @@
   },
   "servers": [
     {
-      "url": "http://localhost:4000"
+      "url": "https://aquatrack-bd.onrender.com"
     },
     {
-      "url": "https://aquatrack-bd.onrender.com"
+      "url": "http://localhost:4000"
     }
   ],
   "tags": [
@@ -1250,7 +1250,7 @@
         }
       }
     },
-    "/water/month/{month}": {
+    "/water/monthly/{month}": {
       "get": {
         "tags": [
           "Water"
@@ -1294,7 +1294,30 @@
                       "type": "array",
                       "description": "List of water consumption records sorted by time (earliest to latest).",
                       "items": {
-                        "$ref": "#/components/schemas/water"
+                        "type": "object",
+                        "required": [
+                          "totalAmount",
+                          "date",
+                          "percentage"
+                        ],
+                        "properties": {
+                          "totalAmount": {
+                            "type": "number",
+                            "description": "User`s daily water used amount",
+                            "example": 1600
+                          },
+                          "date": {
+                            "type": "string",
+                            "description": "Date of water intake",
+                            "example": "2025-03-08"
+                          },
+                          "percentage": {
+                            "type": "number",
+                            "description": "Shows % completion of the dailyWaterNorm",
+                            "maximum": 100,
+                            "example": 50
+                          }
+                        }
                       }
                     }
                   }
