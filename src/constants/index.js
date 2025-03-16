@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { getEnvVar } from '../utils/getEnvVar';
 export const SWAGGER_PATH = path.join(process.cwd(), 'docs', 'swagger.json');
 
 export const FIFTEEN_MINUTES = 15 * 60 * 1000;
@@ -23,8 +24,8 @@ export const CLOUDINARY = {
 };
 
 export const ORIGINSALLOWED = [
-  'http://localhost:5173',
   'http://localhost:4000',
-  'https://aquatrack-bd.onrender.com',
-  'https://final-project-frontend-taupe.vercel.app',
+  getEnvVar('PROD_DOMAIN'),
+  getEnvVar('DEV_DOMAIN'),
+  getEnvVar('DOCUMENTATION_PROD_DOMAIN'),
 ];

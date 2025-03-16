@@ -104,8 +104,8 @@ export const requestResetToken = async (email) => {
   const template = handlebars.compile(templateSource);
   const html = template({
     name: user.name,
-    link: `http://https://final-project-frontend-taupe.vercel.app/change-pwd?token=${resetToken}`,
-    devLink: `http://localhost:5173/change-pwd?token=${resetToken}
+    link: `${getEnvVar('PROD_DOMAIN')}/change-pwd?token=${resetToken}`,
+    devLink: `${getEnvVar('DEV_DOMAIN')}/change-pwd?token=${resetToken}
     `,
 
     /*`${getEnvVar('APP_DOMAIN')}/reset-password?token=${resetToken}
