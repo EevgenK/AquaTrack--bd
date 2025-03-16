@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { getEnvVar } from '../utils/getEnvVar';
+import { getEnvVar } from '../utils/getEnvVar.js';
 export const SWAGGER_PATH = path.join(process.cwd(), 'docs', 'swagger.json');
 
 export const FIFTEEN_MINUTES = 15 * 60 * 1000;
