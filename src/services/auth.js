@@ -107,9 +107,6 @@ export const requestResetToken = async (email) => {
     link: `${getEnvVar('PROD_DOMAIN')}/change-pwd?token=${resetToken}`,
     devLink: `${getEnvVar('DEV_DOMAIN')}/change-pwd?token=${resetToken}
     `,
-
-    /*`${getEnvVar('APP_DOMAIN')}/reset-password?token=${resetToken}
-    `*/
   });
 
   try {

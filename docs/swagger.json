@@ -684,7 +684,7 @@
         }
       }
     },
-    "/auth/reset-pwd": {
+    "/auth/reset-password": {
       "post": {
         "tags": [
           "Auth"
