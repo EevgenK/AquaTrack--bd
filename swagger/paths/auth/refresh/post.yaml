@@ -3,7 +3,8 @@ tags:
 summary: Refresh session token
 operationId: refreshUsersSession
 description: Refreshes the user session, generates a new access token and updates cookies.
-security: []
+security:
+  - bearerAuth: []
 responses:
   '200':
     description: Successfully refreshed user session

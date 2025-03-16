@@ -196,7 +196,11 @@
         "summary": "Logout user from system",
         "operationId": "logoutUser",
         "description": "Logout user from system",
-        "security": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "204": {
             "description": "No Content"
@@ -218,7 +222,11 @@
         "summary": "Refresh session token",
         "operationId": "refreshUsersSession",
         "description": "Refreshes the user session, generates a new access token and updates cookies.",
-        "security": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successfully refreshed user session",

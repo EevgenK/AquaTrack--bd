@@ -27,18 +27,6 @@ export const getWaterDaily = async (userId, date) => {
   return result;
 };
 
-// export const getWaterMonthly = async (userId, month) => {
-// const result = await WaterCollection.find({
-//   userId,
-//   date: { $regex: `^${month}-` },
-// }).sort({ date: 1 });
-
-// if (!result.length) {
-//   throw createHttpError(404, 'Month not found');
-// }
-//   return result;
-// };
-
 export const getWaterMonthly = async (userId, month) => {
   const { dailyWaterNorm } = await UsersCollection.findOne({ _id: userId });
 
