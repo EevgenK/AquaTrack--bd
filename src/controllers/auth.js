@@ -1,4 +1,3 @@
-import createHttpError from 'http-errors';
 import {
   getCurrentData,
   getUsersCount,
@@ -12,10 +11,7 @@ import {
   loginOrSignupWithGoogle,
 } from '../services/auth.js';
 import { setupSession } from '../utils/createSessions.js';
-import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 import { generateAuthUrl } from '../utils/googleOAuthClient.js';
-import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
-import { getEnvVar } from '../utils/getEnvVar.js';
 import { getFileUrlByFeatureFlag } from '../utils/getFileUrlByFeatureFlag.js';
 
 export const registerUserController = async (req, res, next) => {
