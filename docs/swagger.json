@@ -1361,6 +1361,12 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
+      },
+      "cors": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Origin",
+        "description": "Cross-Origin Resource Sharing (CORS) policy is enabled for this API.\nRequests are allowed only from the following domains:\n- http://localhost:5173\n- http://localhost:4000\n- https://aquatrack-bd.onrender.com\nEnsure that the `Origin` header is included in requests from allowed domains.\n"
       }
     },
     "schemas": {
