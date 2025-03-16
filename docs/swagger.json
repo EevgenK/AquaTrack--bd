@@ -7,7 +7,7 @@
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "This is a documentation of students app"
+    "description": "This is a documentation on how to use the AquaTrack database"
   },
   "servers": [
     {
@@ -24,7 +24,7 @@
     },
     {
       "name": "Auth",
-      "description": "Auth operations."
+      "description": "Operations about user."
     }
   ],
   "paths": {
@@ -492,7 +492,7 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "$ref": "#/components/responses/400-user"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -610,7 +610,67 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "description": "Bad Request Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "BadRequestError"
+                    },
+                    "data": {
+                      "type": "object",
+                      "required": [
+                        "message"
+                      ],
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "example": "Bad Request"
+                        }
+                      },
+                      "errors": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "description": "Errors`s details",
+                              "oneOf": [
+                                {
+                                  "type": "string",
+                                  "example": "email should have at least 3 characters"
+                                },
+                                {
+                                  "type": "string",
+                                  "example": "email should have not more than 50 characters"
+                                },
+                                {
+                                  "type": "string",
+                                  "example": "password value should be a string"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -687,7 +747,66 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "description": "Bad Request Error",
+            "content": {
+              "application/json": {
+                "schema": null,
+                "type": "object",
+                "required": [
+                  "status",
+                  "message",
+                  "data"
+                ],
+                "properties": {
+                  "status": {
+                    "type": "integer",
+                    "example": 400
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "BadRequestError"
+                  },
+                  "data": {
+                    "type": "object",
+                    "required": [
+                      "message"
+                    ],
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Bad Request"
+                      },
+                      "errors": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "description": "Errors`s details",
+                              "oneOf": [
+                                {
+                                  "type": "string",
+                                  "example": "password is required"
+                                },
+                                {
+                                  "type": "string",
+                                  "example": "password should have at least 3 characters"
+                                },
+                                {
+                                  "type": "string",
+                                  "example": "password should have not more than 50 characters"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -762,7 +881,7 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "$ref": "#/components/responses/400-avatar"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -1361,11 +1480,6 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
-      },
-      "corsPolicy": {
-        "type": "http",
-        "scheme": "bearer",
-        "description": "Cross-Origin Resource Sharing (CORS) policy is enabled for this API.\nRequests are allowed only from the following domains:\n- http://localhost:5173\n- http://localhost:4000\n- https://aquatrack-bd.onrender.com\n|\nEnsure that the `Origin` header is included in requests from allowed domains.\n"
       }
     },
     "schemas": {
@@ -1485,47 +1599,6 @@
       }
     },
     "responses": {
-      "400": {
-        "description": "Bad Request Error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 400
-                },
-                "message": {
-                  "type": "string",
-                  "example": "BadRequestError"
-                },
-                "data": {
-                  "type": "object",
-                  "required": [
-                    "message"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Bad Request"
-                    },
-                    "errors": {
-                      "type": "array",
-                      "example": "[{Error`s details}]"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
       "401": {
         "description": "Unauthorized - Authentication failed",
         "content": {
@@ -1554,7 +1627,7 @@
                       "oneOf": [
                         {
                           "type": "string",
-                          "example": "Session not found"
+                          "example": "Access token expired"
                         },
                         {
                           "type": "string",
@@ -1566,7 +1639,7 @@
                         },
                         {
                           "type": "string",
-                          "example": "Access token expired"
+                          "example": "Session token expired"
                         }
                       ]
                     }
@@ -1918,6 +1991,257 @@
           }
         }
       },
+      "400-user": {
+        "description": "Bad Request Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "BadRequestError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Bad Request"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string",
+                            "description": "Errors`s details",
+                            "oneOf": [
+                              {
+                                "type": "string",
+                                "example": "email value should be a string"
+                              },
+                              {
+                                "type": "string",
+                                "example": "email should have at least 3 characters"
+                              },
+                              {
+                                "type": "string",
+                                "example": "email should have not more than 50 characters"
+                              },
+                              {
+                                "type": "string",
+                                "example": "password value should be a string"
+                              },
+                              {
+                                "type": "string",
+                                "example": "name value should be a string"
+                              },
+                              {
+                                "type": "string",
+                                "example": "name should have at least 3 characters"
+                              },
+                              {
+                                "type": "string",
+                                "example": "name should have not more than 12 characters"
+                              },
+                              {
+                                "type": "string",
+                                "example": "gender should be a string"
+                              },
+                              {
+                                "type": "string",
+                                "example": "should be either (woman) or (man)"
+                              },
+                              {
+                                "type": "string",
+                                "example": "weight value should be a number"
+                              },
+                              {
+                                "type": "string",
+                                "example": "weight value cannot be less than 0"
+                              },
+                              {
+                                "type": "string",
+                                "example": "weight value cannot be more than 500"
+                              },
+                              {
+                                "type": "string",
+                                "example": "dailySportTime value should be a number"
+                              },
+                              {
+                                "type": "string",
+                                "example": "dailySportTime value cannot be less than 0"
+                              },
+                              {
+                                "type": "string",
+                                "example": "dailySportTime value cannot be more than 24"
+                              },
+                              {
+                                "type": "string",
+                                "example": "dailyWaterNorm value should be a number"
+                              },
+                              {
+                                "type": "string",
+                                "example": "dailyWaterNorm value cannot be less than 500"
+                              },
+                              {
+                                "type": "string",
+                                "example": "dailyWaterNorm value cannot be more than 15000"
+                              }
+                            ]
+                          },
+                          "path": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "description": "shows the reason name of error",
+                              "oneOf": [
+                                {
+                                  "type": "string",
+                                  "example": "email"
+                                },
+                                {
+                                  "type": "string",
+                                  "example": "name"
+                                },
+                                {
+                                  "type": "string",
+                                  "example": "gender"
+                                },
+                                {
+                                  "type": "string",
+                                  "example": "weight"
+                                },
+                                {
+                                  "type": "string",
+                                  "example": "dailySportTime"
+                                },
+                                {
+                                  "type": "string",
+                                  "example": "dailyWaterNorm"
+                                }
+                              ]
+                            }
+                          },
+                          "type": {
+                            "type": "string",
+                            "description": "shows the reason of error",
+                            "oneOf": [
+                              {
+                                "type": "string",
+                                "example": "string.min"
+                              },
+                              {
+                                "type": "string",
+                                "example": "string.max"
+                              },
+                              {
+                                "type": "string"
+                              }
+                            ],
+                            "example": "string.base"
+                          },
+                          "context": {
+                            "type": "object",
+                            "required": [
+                              "label",
+                              "key"
+                            ],
+                            "properties": {
+                              "limit": {
+                                "type": "number",
+                                "description": "The limit of value",
+                                "minimum": 3,
+                                "maximum": 50
+                              },
+                              "value": {
+                                "type": "string",
+                                "description": "shows the request value"
+                              },
+                              "label": {
+                                "type": "string",
+                                "oneOf": [
+                                  {
+                                    "type": "string",
+                                    "example": "email"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "example": "name"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "example": "gender"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "example": "weight"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "example": "dailySportTime"
+                                  },
+                                  {
+                                    "type": "string",
+                                    "example": "dailyWaterNorm"
+                                  }
+                                ],
+                                "key": {
+                                  "type": "string",
+                                  "oneOf": [
+                                    {
+                                      "type": "string",
+                                      "example": "email"
+                                    },
+                                    {
+                                      "type": "string",
+                                      "example": "name"
+                                    },
+                                    {
+                                      "type": "string",
+                                      "example": "gender"
+                                    },
+                                    {
+                                      "type": "string",
+                                      "example": "weight"
+                                    },
+                                    {
+                                      "type": "string",
+                                      "example": "dailySportTime"
+                                    },
+                                    {
+                                      "type": "string",
+                                      "example": "dailyWaterNorm"
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "404-user-data": {
         "description": "Not Found Error",
         "content": {
@@ -1985,6 +2309,47 @@
                     "message": {
                       "type": "string",
                       "example": "Failed to send the email, please try again later."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400-avatar": {
+        "description": "Bad Request Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "BadRequestError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Bad Request"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "example": "avatar should be a string"
                     }
                   }
                 }

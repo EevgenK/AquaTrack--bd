@@ -24,4 +24,4 @@ content:
               example: 'Bad Request'
             errors:
               type: array
-              example: '[{Error`s details}]'
+              example: avatar should be a string

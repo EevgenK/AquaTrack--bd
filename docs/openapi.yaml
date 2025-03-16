@@ -5,12 +5,12 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  description: This is a documentation of students app
+  description: This is a documentation on how to use the AquaTrack database
 tags:
   - name: Water
     description: Operations about water.
   - name: Auth
-    description: Auth operations.
+    description: Operations about user.
 servers:
   - url: https://aquatrack-bd.onrender.com
   - url: http://localhost:4000
@@ -69,14 +69,3 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
-    corsPolicy:
-      type: http
-      scheme: bearer
-      description: |
-        Cross-Origin Resource Sharing (CORS) policy is enabled for this API.
-        Requests are allowed only from the following domains:
-        - http://localhost:5173
-        - http://localhost:4000
-        - https://aquatrack-bd.onrender.com
-        |
-        Ensure that the `Origin` header is included in requests from allowed domains.

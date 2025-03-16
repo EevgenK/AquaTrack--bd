@@ -39,7 +39,7 @@ responses:
               example: https://res.cloudinary.com/dobkaq79k/image/upload/example.img
 
   '400':
-    $ref: '../../../components/responses/400.yaml'
+    $ref: '../../../components/responses/400-avatar.yaml'
   '401':
     $ref: '../../../components/responses/401.yaml'
   '404':

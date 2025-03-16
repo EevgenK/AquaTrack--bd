@@ -26,4 +26,5 @@ export const ORIGINSALLOWED = [
   'http://localhost:5173',
   'http://localhost:4000',
   'https://aquatrack-bd.onrender.com',
+  'https://final-project-frontend-taupe.vercel.app',
 ];
