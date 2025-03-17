@@ -105,8 +105,6 @@ export const requestResetToken = async (email) => {
   const html = template({
     name: user.name,
     link: `${getEnvVar('PROD_DOMAIN')}/change-pwd?token=${resetToken}`,
-    devLink: `${getEnvVar('DEV_DOMAIN')}/change-pwd?token=${resetToken}
-    `,
   });
 
   try {
