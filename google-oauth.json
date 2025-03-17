@@ -6,8 +6,9 @@
     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
 
     "redirect_uris": [
-      "https://aquatrack-bd.onrender.com/auth/confirm-oauth",
-      "http://localhost:4000/auth/confirm-oauth"
+      "https://final-project-frontend-taupe.vercel.app/confirm-google-oauth",
+      "http://localhost:5173/confirm-google-oauth",
+      "https://aquatrack-bd.onrender.com/auth/confirm-oauth"
     ]
   }
 }
